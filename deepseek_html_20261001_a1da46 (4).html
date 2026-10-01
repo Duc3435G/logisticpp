@@ -1,0 +1,2323 @@
+<!DOCTYPE html>
+<html lang="vi" class="h-full">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Logistics & Supply Chain 2026 | Trình Chiếu Toàn Diện</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+    theme: {
+        extend: {
+            colors: {
+                cream: { 50: '#FFFBF5', 100: '#FFF4E6', 200: '#FFE8CC' },
+                coral: { 300: '#FFB4A2', 400: '#FF9E8A', 500: '#F4846B', 600: '#E06B52' },
+                mint: { 100: '#E8F8F2', 200: '#C8EDE0', 300: '#A3DFC9', 400: '#7DD3B0', 500: '#4DB896' },
+                sun: { 300: '#FFE08A', 400: '#FFD166', 500: '#FFC233' },
+                sky2: { 400: '#7DD3FC', 500: '#38BDF8' },
+                lilac: { 400: '#C4B5FD', 500: '#A78BFA' }
+            },
+            fontFamily: {
+                sans: ['Be Vietnam Pro', 'Inter', 'sans-serif'],
+                display: ['Quicksand', 'Be Vietnam Pro', 'sans-serif'],
+            }
+        }
+    }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800;900&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; }
+body { font-family: 'Be Vietnam Pro', sans-serif; background-color: #FFFBF5; color: #2D3748; user-select: none; }
+
+#stage-wrap { position: fixed; inset: 0; background: #FFFBF5; overflow: hidden; }
+#stage { width: 1920px; height: 1080px; position: absolute; transform-origin: top left; background: #FFFBF5; }
+
+.bg-dots { position: absolute; inset: 0; background-image: radial-gradient(#F4846B 2px, transparent 2px); background-size: 44px 44px; opacity: 0.05; pointer-events: none; z-index: 0; }
+
+.paper-card { background: #FFFFFF; border: 3px solid #FFE8CC; box-shadow: 0 8px 0 0 #FFE8CC, 0 16px 40px -10px rgba(244, 132, 107, 0.18); }
+
+.slide-container {
+    position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center;
+    padding: 95px 50px 90px 50px; opacity: 0; visibility: hidden; transform: scale(0.96); filter: blur(6px);
+    transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), filter 0.55s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.55s;
+    pointer-events: none; z-index: 1;
+}
+.slide-container.active { opacity: 1; visibility: visible; transform: scale(1); filter: blur(0px); pointer-events: auto; }
+
+.reveal-item { opacity: 0; pointer-events: none; visibility: hidden; transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+.reveal-item.effect-fade-up { transform: translateY(30px); }
+.reveal-item.effect-fade-left { transform: translateX(-40px); }
+.reveal-item.effect-fade-right { transform: translateX(40px); }
+.reveal-item.effect-zoom-in { transform: scale(0.85); }
+.reveal-item.effect-blur-reveal { transform: translateY(20px); filter: blur(10px); }
+.reveal-item.revealed { opacity: 1; transform: translateY(0) translateX(0) scale(1) !important; filter: blur(0px) !important; pointer-events: auto; visibility: visible; }
+
+.wavy-underline {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='10' viewBox='0 0 100 10'%3E%3Cpath d='M0 5 Q 12.5 0, 25 5 T 50 5 T 75 5 T 100 5' stroke='%23F4846B' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: repeat-x; background-position: bottom; background-size: 80px 10px; padding-bottom: 14px;
+}
+
+.photo-frame { background: #FFFFFF; padding: 8px; border-radius: 12px; box-shadow: 0 6px 0 rgba(0,0,0,0.06), 0 20px 44px -12px rgba(244,132,107,0.45); transform: rotate(-2deg); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: inline-block; }
+.photo-frame:hover { transform: rotate(0deg) scale(1.03); }
+.photo-frame.tilt-right { transform: rotate(2deg); }
+.photo-frame.tilt-right:hover { transform: rotate(0deg) scale(1.03); }
+
+.img-frame { width: 100%; height: 100%; border-radius: 8px; background: linear-gradient(135deg, #FFE8CC 0%, #FFD4C4 50%, #C8EDE0 100%); display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
+.img-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.img-frame .fallback-icon { font-size: 120px; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1)); }
+
+/* ENLARGED STAT CARD */
+.stat-card { background: #FFFFFF; border-radius: 24px; border: 3px solid #FFE8CC; padding: 24px 18px; position: relative; overflow: hidden; box-shadow: 0 8px 0 #FFE8CC; display: flex; flex-direction: column; }
+.stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 8px; background: linear-gradient(90deg, #F4846B, #FFD166, #7DD3B0); }
+
+.chart-bar { width: 100%; border-radius: 14px 14px 0 0; position: relative; transform-origin: bottom; transform: scaleY(0); }
+.slide-container.active .chart-bar { animation: growUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+@keyframes growUp { to { transform: scaleY(1); } }
+
+.float-deco { position: absolute; pointer-events: none; z-index: 2; animation: floaty 6s ease-in-out infinite; }
+.float-deco:nth-child(2n) { animation-delay: -2s; animation-duration: 7s; }
+.float-deco:nth-child(3n) { animation-delay: -4s; animation-duration: 8s; }
+@keyframes floaty { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-14px) rotate(4deg); } }
+
+.ui-header { position: absolute; top: 0; left: 0; right: 0; height: 90px; padding: 0 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px dashed rgba(244, 132, 107, 0.4); background: rgba(255, 251, 245, 0.85); backdrop-filter: blur(12px); z-index: 100; }
+.ui-footer { position: absolute; bottom: 0; left: 0; right: 0; height: 80px; padding: 0 40px; display: flex; justify-content: space-between; align-items: center; border-top: 3px dashed rgba(244, 132, 107, 0.4); background: rgba(255, 251, 245, 0.85); backdrop-filter: blur(12px); z-index: 100; }
+
+.section-badge { display: inline-block; padding: 10px 28px; border-radius: 999px; font-weight: 800; font-size: 18px; letter-spacing: 1.5px; text-transform: uppercase; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+
+.source-tag { display: inline-block; padding: 4px 12px; border-radius: 999px; background: #FFF4E6; color: #E06B52; font-size: 12px; font-weight: 700; margin-top: 6px; line-height: 1.4; }
+.source-tag-inline { display: inline-block; padding: 2px 10px; border-radius: 6px; background: #FFF4E6; color: #E06B52; font-size: 12px; font-weight: 700; margin-left: 6px; }
+
+/* ENLARGED DATA HIGHLIGHT */
+.data-highlight {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, #FFF4E6 0%, #FFE8CC 100%);
+    border-radius: 22px; border: 3px solid #FFD4C4;
+    padding: 20px 14px; text-align: center;
+    box-shadow: 0 6px 0 #FFD4C4;
+    min-height: 130px;
+}
+.data-highlight .num { font-size: 52px; font-weight: 900; color: #E06B52; line-height: 1; letter-spacing: -1.5px; }
+.data-highlight .lbl { font-size: 16px; color: #4B5563; font-weight: 700; margin-top: 8px; line-height: 1.3; }
+.data-highlight .src { font-size: 12px; color: #E06B52; font-weight: 600; margin-top: 5px; opacity: 0.85; }
+
+/* Large number display */
+.big-number { font-size: 72px; font-weight: 900; line-height: 1; letter-spacing: -2px; }
+
+/* Feature icon tile */
+.feature-tile {
+    background: #FFFFFF; border-radius: 22px; border: 3px solid #FFE8CC;
+    padding: 24px 18px; box-shadow: 0 6px 0 #FFE8CC;
+    display: flex; flex-direction: column; text-align: center;
+}
+
+body.is-fullscreen .fullscreen-hide { display: none !important; }
+* { -webkit-user-select: none; user-select: none; }
+</style>
+</head>
+<body>
+
+<div id="stage-wrap">
+<div id="stage">
+
+<div class="bg-dots"></div>
+<div class="float-deco" style="top: 140px; left: 30px; font-size: 72px; opacity: 0.20;">🚚</div>
+<div class="float-deco" style="top: 240px; right: 40px; font-size: 60px; opacity: 0.20;">📦</div>
+<div class="float-deco" style="bottom: 160px; left: 60px; font-size: 72px; opacity: 0.20;">🚢</div>
+<div class="float-deco" style="bottom: 200px; right: 60px; font-size: 60px; opacity: 0.20;">✈️</div>
+
+<!-- HEADER -->
+<div class="ui-header fullscreen-hide">
+    <div class="flex items-center space-x-4">
+        <div class="p-3 bg-gradient-to-br from-coral-400 to-sun-400 rounded-2xl shadow-lg rotate-3">
+            <i data-lucide="truck" class="w-8 h-8 text-white stroke-[2.5]"></i>
+        </div>
+        <div>
+            <h1 class="font-extrabold text-xl tracking-wide text-slate-800 font-display">
+                LOGISTICS & CHUỖI CUNG ỨNG <span class="text-coral-500">✿</span> 2026
+            </h1>
+            <p class="text-sm text-slate-500">Trình chiếu toàn diện — 25 slides</p>
+        </div>
+    </div>
+    <div class="flex items-center space-x-3">
+        <div class="px-4 py-2 rounded-full bg-mint-100 border-2 border-mint-300 text-mint-500 text-sm font-bold flex items-center space-x-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-mint-400 animate-pulse"></span>
+            <span>Bước <span id="current-step-num">1</span>/<span id="total-step-num">1</span></span>
+        </div>
+        <button id="toc-btn" class="px-4 py-2 rounded-xl bg-white border-2 border-coral-200 hover:border-coral-400 text-slate-600 hover:text-coral-500 text-sm font-bold flex items-center space-x-2 transition shadow-sm">
+            <i data-lucide="list" class="w-5 h-5"></i><span>Mục Lục</span>
+        </button>
+        <button id="fullscreen-btn" class="px-4 py-2 rounded-xl bg-white border-2 border-coral-200 hover:border-coral-400 text-slate-600 hover:text-coral-500 text-sm font-bold flex items-center space-x-2 transition shadow-sm">
+            <i data-lucide="maximize" class="w-5 h-5" id="fullscreen-icon"></i><span id="fullscreen-text">Toàn Màn Hình</span>
+        </button>
+    </div>
+</div>
+
+<!-- ================================ PHẦN 1: KHỞI ĐỘNG ================================ -->
+
+<!-- SLIDE 1: TITLE -->
+<div class="slide-container" data-slide="1">
+    <div class="text-center space-y-8 reveal-item effect-blur-reveal max-w-7xl mx-auto">
+        <div class="flex justify-center items-center gap-10 text-[140px] mb-4">
+            <span>🚚</span><span>📦</span><span>🚢</span><span>✈️</span>
+        </div>
+        <h2 class="text-[180px] font-black text-slate-800 font-display tracking-tight leading-none">
+            LOGISTICS <span class="text-coral-500 wavy-underline">2026</span>
+        </h2>
+        <p class="text-slate-600 text-6xl font-bold">& QUẢN LÝ CHUỖI CUNG ỨNG</p>
+        <p class="text-slate-500 text-4xl italic">"Huyết mạch của nền kinh tế toàn cầu" 🌏</p>
+        <div class="flex justify-center gap-8 pt-8 text-7xl">
+            <span>🏭</span><span>⚓</span><span>📊</span><span>🛳️</span><span>🚛</span><span>📦</span>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 2: AGENDA -->
+<div class="slide-container" data-slide="2">
+    <div class="text-center space-y-4 reveal-item effect-fade-up mb-8">
+        <span class="section-badge bg-sun-400 text-white">📋 NỘI DUNG TRÌNH BÀY</span>
+        <h2 class="text-8xl font-black text-slate-800 font-display">CẤU TRÚC 7 PHẦN</h2>
+    </div>
+    <div class="grid grid-cols-4 gap-5 max-w-[1840px] mx-auto w-full mb-5">
+        <div class="paper-card p-6 rounded-3xl reveal-item effect-fade-up border-l-8 border-l-coral-400">
+            <div class="text-6xl mb-3">1️⃣</div>
+            <h3 class="font-black text-3xl text-slate-800">Khởi Động</h3>
+            <p class="text-lg text-slate-500 mt-2">Định nghĩa & phân biệt</p>
+        </div>
+        <div class="paper-card p-6 rounded-3xl reveal-item effect-fade-up border-l-8 border-l-sun-400">
+            <div class="text-6xl mb-3">2️⃣</div>
+            <h3 class="font-black text-3xl text-slate-800">Bối Cảnh</h3>
+            <p class="text-lg text-slate-500 mt-2">Quy mô & tăng trưởng</p>
+        </div>
+        <div class="paper-card p-6 rounded-3xl reveal-item effect-fade-up border-l-8 border-l-mint-400">
+            <div class="text-6xl mb-3">3️⃣</div>
+            <h3 class="font-black text-3xl text-slate-800">Vận Hành</h3>
+            <p class="text-lg text-slate-500 mt-2">6 mảng hoạt động</p>
+        </div>
+        <div class="paper-card p-6 rounded-3xl reveal-item effect-fade-up border-l-8 border-l-sky2-400">
+            <div class="text-6xl mb-3">4️⃣</div>
+            <h3 class="font-black text-3xl text-slate-800">Công Nghệ</h3>
+            <p class="text-lg text-slate-500 mt-2">AI, IoT & Green</p>
+        </div>
+    </div>
+    <div class="grid grid-cols-3 gap-5 max-w-6xl mx-auto w-full">
+        <div class="paper-card p-6 rounded-3xl reveal-item effect-fade-up border-l-8 border-l-lilac-400">
+            <div class="text-6xl mb-3">5️⃣</div>
+            <h3 class="font-black text-3xl text-slate-800">Nghề Nghiệp</h3>
+            <p class="text-lg text-slate-500 mt-2">Vị trí & thu nhập</p>
+        </div>
+        <div class="paper-card p-6 rounded-3xl reveal-item effect-fade-up border-l-8 border-l-coral-400">
+            <div class="text-6xl mb-3">6️⃣</div>
+            <h3 class="font-black text-3xl text-slate-800">Đào Tạo</h3>
+            <p class="text-lg text-slate-500 mt-2">Trường ĐH & chứng chỉ</p>
+        </div>
+        <div class="paper-card p-6 rounded-3xl reveal-item effect-fade-up border-l-8 border-l-mint-400">
+            <div class="text-6xl mb-3">7️⃣</div>
+            <h3 class="font-black text-3xl text-slate-800">Tổng Kết</h3>
+            <p class="text-lg text-slate-500 mt-2">Q&A & Hành động</p>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 3: ĐỊNH NGHĨA -->
+<div class="slide-container" data-slide="3">
+    <div class="text-center space-y-3 reveal-item effect-fade-up mb-4">
+        <span class="section-badge bg-coral-400 text-white">📖 PHẦN 1 · ĐỊNH NGHĨA</span>
+        <h2 class="text-7xl font-black text-slate-800 font-display">LOGISTICS LÀ GÌ?</h2>
+    </div>
+    <div class="grid grid-cols-3 gap-5 max-w-[1840px] mx-auto w-full mb-4">
+        <div class="paper-card p-6 rounded-3xl reveal-item effect-fade-left border-t-8 border-t-coral-400">
+            <div class="flex items-center gap-3 mb-3">
+                <div class="p-3 bg-coral-300/30 rounded-2xl text-coral-600"><i data-lucide="globe" class="w-10 h-10"></i></div>
+                <h3 class="font-black text-3xl text-slate-800">Định Nghĩa</h3>
+            </div>
+            <p class="text-xl text-slate-600 leading-relaxed">
+                Quá trình <b class="text-coral-500">hoạch định, thực hiện, kiểm soát</b> dòng hàng hóa, dịch vụ và thông tin từ điểm xuất phát → điểm tiêu thụ.
+            </p>
+        </div>
+        <div class="paper-card p-6 rounded-3xl reveal-item effect-fade-up border-t-8 border-t-sun-400">
+            <div class="flex items-center gap-3 mb-3">
+                <div class="p-3 bg-sun-300/40 rounded-2xl text-sun-500"><i data-lucide="target" class="w-10 h-10"></i></div>
+                <h3 class="font-black text-3xl text-slate-800">Mục Tiêu 7R</h3>
+            </div>
+            <p class="text-xl text-slate-600 leading-relaxed">
+                Đúng <b class="text-sun-500">sản phẩm, số lượng, thời gian, địa điểm, khách hàng, chi phí, chất lượng</b>.
+            </p>
+        </div>
+        <div class="paper-card p-6 rounded-3xl reveal-item effect-fade-right border-t-8 border-t-mint-400">
+            <div class="flex items-center gap-3 mb-3">
+                <div class="p-3 bg-mint-300/30 rounded-2xl text-mint-500"><i data-lucide="layers" class="w-10 h-10"></i></div>
+                <h3 class="font-black text-3xl text-slate-800">Phân Loại 1-5PL</h3>
+            </div>
+            <p class="text-xl text-slate-600 leading-relaxed">
+                <b class="text-mint-500">1PL → 5PL</b>: tự vận hành → thuê ngoài → tích hợp → chuỗi cung ứng → mạng lưới.
+            </p>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-4 gap-4 max-w-[1840px] mx-auto w-full mb-4 reveal-item effect-fade-up">
+        <div class="data-highlight">
+            <div class="num">$9,6T</div>
+            <div class="lbl">Quy mô logistics toàn cầu 2025</div>
+            <div class="src">Armstrong & Associates</div>
+        </div>
+        <div class="data-highlight">
+            <div class="num">90%</div>
+            <div class="lbl">Hàng hóa thế giới qua đường biển</div>
+            <div class="src">UNCTAD 2025</div>
+        </div>
+        <div class="data-highlight">
+            <div class="num">150+</div>
+            <div class="lbl">Quốc gia trong chuỗi cung ứng</div>
+            <div class="src">WTO</div>
+        </div>
+        <div class="data-highlight">
+            <div class="num">17</div>
+            <div class="lbl">Ngành CN cốt lõi của logistics</div>
+            <div class="src">World Bank</div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-4 gap-4 max-w-[1840px] mx-auto w-full reveal-item effect-fade-up">
+        <div class="flex justify-center">
+            <div class="photo-frame" style="width: 420px; height: 230px;">
+                <div class="img-frame">
+                    <img src="cang-bien.jpg" alt="Cảng biển" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">⚓</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame tilt-right" style="width: 420px; height: 230px;">
+                <div class="img-frame">
+                    <img src="xe-container.jpg" alt="Xe container" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">🚛</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame" style="width: 420px; height: 230px;">
+                <div class="img-frame">
+                    <img src="may-bay.jpg" alt="Máy bay" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">✈️</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame tilt-right" style="width: 420px; height: 230px;">
+                <div class="img-frame">
+                    <img src="kho-bai.jpg" alt="Kho bãi" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">🏭</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 4: LOGISTICS vs SUPPLY CHAIN -->
+<div class="slide-container" data-slide="4">
+    <div class="text-center space-y-3 reveal-item effect-fade-up mb-5">
+        <span class="section-badge bg-coral-400 text-white">🔄 PHẦN 1 · PHÂN BIỆT</span>
+        <h2 class="text-7xl font-black text-slate-800 font-display">LOGISTICS vs CHUỖI CUNG ỨNG</h2>
+    </div>
+    <div class="grid grid-cols-2 gap-6 max-w-[1840px] mx-auto w-full">
+        <div class="paper-card p-7 rounded-3xl reveal-item effect-fade-left border-t-8 border-t-coral-400">
+            <div class="flex items-center gap-4 mb-4">
+                <div class="p-4 bg-coral-300/30 rounded-xl text-coral-600"><i data-lucide="box" class="w-12 h-12"></i></div>
+                <div>
+                    <h3 class="font-black text-4xl text-slate-800">LOGISTICS</h3>
+                    <span class="text-xl text-coral-500 font-bold">Phạm vi: Vận hành vật lý</span>
+                </div>
+            </div>
+            <p class="text-xl text-slate-600 leading-relaxed mb-4">
+                Tập trung dòng dịch chuyển <b class="text-coral-500">Hàng hóa, Kho bãi, Thủ tục & Vận tải</b> từ A → B.
+            </p>
+            <div class="grid grid-cols-2 gap-3">
+                <div class="data-highlight">
+                    <div class="num" style="font-size:42px;">$300B</div>
+                    <div class="lbl">Thị trường 3PL toàn cầu 2025</div>
+                </div>
+                <div class="data-highlight">
+                    <div class="num" style="font-size:42px;">11,2%</div>
+                    <div class="lbl">CAGR logistics toàn cầu đến 2030</div>
+                </div>
+            </div>
+        </div>
+        <div class="paper-card p-7 rounded-3xl reveal-item effect-fade-right border-t-8 border-t-sky2-400">
+            <div class="flex items-center gap-4 mb-4">
+                <div class="p-4 bg-sky2-400/30 rounded-xl text-sky2-500"><i data-lucide="link" class="w-12 h-12"></i></div>
+                <div>
+                    <h3 class="font-black text-4xl text-slate-800">SUPPLY CHAIN</h3>
+                    <span class="text-xl text-sky2-500 font-bold">Phạm vi: Toàn hệ sinh thái</span>
+                </div>
+            </div>
+            <p class="text-xl text-slate-600 leading-relaxed mb-4">
+                Toàn bộ mắt xích từ <b class="text-sky2-500">NCC → Sản xuất → Logistics → Đại lý → KH cuối</b>.
+            </p>
+            <div class="grid grid-cols-2 gap-3">
+                <div class="data-highlight">
+                    <div class="num" style="font-size:42px;">$150B</div>
+                    <div class="lbl">Thiệt hại do đứt gãy SCM 2024</div>
+                </div>
+                <div class="data-highlight">
+                    <div class="num" style="font-size:42px;">60%</div>
+                    <div class="lbl">DN tăng đầu tư số hóa SCM</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ================================ PHẦN 2: BỐI CẢNH ================================ -->
+
+<!-- SLIDE 5: QUY MÔ THỊ TRƯỜNG -->
+<div class="slide-container" data-slide="5">
+    <div class="text-center space-y-3 reveal-item effect-fade-up mb-4">
+        <span class="section-badge bg-sun-400 text-white">📊 PHẦN 2 · BỐI CẢNH</span>
+        <h2 class="text-7xl font-black text-slate-800 font-display">QUY MÔ THỊ TRƯỜNG 2025</h2>
+    </div>
+    <div class="grid grid-cols-4 gap-4 max-w-[1840px] mx-auto w-full mb-4">
+        <div class="stat-card reveal-item effect-zoom-in text-center">
+            <div class="big-number text-coral-500">$52B</div>
+            <p class="text-2xl text-slate-600 mt-3 font-bold">Quy mô thị trường 2025</p>
+            <span class="source-tag">Mordor Intelligence / GII</span>
+        </div>
+        <div class="stat-card reveal-item effect-zoom-in text-center">
+            <div class="big-number text-sun-500">14-16%</div>
+            <p class="text-2xl text-slate-600 mt-3 font-bold">Tăng trưởng bình quân/năm</p>
+            <span class="source-tag">Gấp 2 lần TB thế giới</span>
+        </div>
+        <div class="stat-card reveal-item effect-zoom-in text-center">
+            <div class="big-number text-mint-500">45K+</div>
+            <p class="text-2xl text-slate-600 mt-3 font-bold">Doanh nghiệp logistics</p>
+            <span class="source-tag">VLA · 10/2025</span>
+        </div>
+        <div class="stat-card reveal-item effect-zoom-in text-center">
+            <div class="big-number text-sky2-500">$930B</div>
+            <p class="text-2xl text-slate-600 mt-3 font-bold">Kim ngạch XNK 2025</p>
+            <span class="source-tag">Tổng cục Thống kê</span>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-4 gap-4 max-w-[1840px] mx-auto w-full mb-4 reveal-item effect-fade-up">
+        <div class="flex justify-center">
+            <div class="photo-frame" style="width: 420px; height: 220px;">
+                <div class="img-frame">
+                    <img src="cang-hai-phong.jpg" alt="Cảng Hải Phòng" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">🚢</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame tilt-right" style="width: 420px; height: 220px;">
+                <div class="img-frame">
+                    <img src="kho-thong-minh.jpg" alt="Kho thông minh" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">🏭</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame" style="width: 420px; height: 220px;">
+                <div class="img-frame">
+                    <img src="container.jpg" alt="Container" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">📦</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame tilt-right" style="width: 420px; height: 220px;">
+                <div class="img-frame">
+                    <img src="san-bay.jpg" alt="Sân bay" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">✈️</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-5 max-w-[1840px] mx-auto w-full reveal-item effect-fade-up">
+        <div class="paper-card p-6 rounded-3xl border-l-8 border-l-coral-400">
+            <div class="flex items-center gap-3 mb-3">
+                <i data-lucide="trending-up" class="w-9 h-9 text-coral-500"></i>
+                <h3 class="font-black text-2xl text-slate-800">Dự báo tăng trưởng</h3>
+            </div>
+            <p class="text-xl text-slate-600 leading-relaxed">
+                2025: <b class="text-coral-500">52,06 tỷ USD</b> → 2026: <b class="text-coral-500">55,5 tỷ USD</b> → 2031: <b class="text-coral-500">76,39 tỷ USD</b> (CAGR 6,6%)
+            </p>
+            <span class="source-tag">GII Research 2025</span>
+        </div>
+        <div class="paper-card p-6 rounded-3xl border-l-8 border-l-mint-400">
+            <div class="flex items-center gap-3 mb-3">
+                <i data-lucide="award" class="w-9 h-9 text-mint-500"></i>
+                <h3 class="font-black text-2xl text-slate-800">Xếp hạng quốc tế</h3>
+            </div>
+            <p class="text-xl text-slate-600 leading-relaxed">
+                LPI 2023: <b class="text-mint-500">43/139</b> quốc gia · Agility 2024: <b class="text-mint-500">Top 8/50</b> thị trường mới nổi
+            </p>
+            <span class="source-tag">World Bank / Agility 2024</span>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 6: BIỂU ĐỒ -->
+<div class="slide-container" data-slide="6">
+    <div class="text-center space-y-2 reveal-item effect-fade-up mb-3">
+        <span class="section-badge bg-sun-400 text-white">📈 PHẦN 2 · TĂNG TRƯỞNG</span>
+        <h2 class="text-7xl font-black text-slate-800 font-display">QUY MÔ THỊ TRƯỜNG 2020 – 2026</h2>
+    </div>
+    <div class="grid grid-cols-12 gap-5 max-w-[1840px] mx-auto w-full items-center">
+        <div class="col-span-8">
+            <div class="paper-card p-7 rounded-3xl reveal-item effect-zoom-in">
+                <div class="flex items-end justify-around gap-3" style="height: 400px;">
+                    <div class="flex flex-col items-center gap-2 flex-1 h-full justify-end">
+                        <span class="text-3xl font-black text-slate-700">32.5</span>
+                        <div class="chart-bar bg-gradient-to-t from-coral-300 to-coral-400" style="height: 48%;"></div>
+                        <span class="text-2xl font-bold text-slate-500">2020</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 flex-1 h-full justify-end">
+                        <span class="text-3xl font-black text-slate-700">34.6</span>
+                        <div class="chart-bar bg-gradient-to-t from-coral-300 to-coral-400" style="height: 52%;"></div>
+                        <span class="text-2xl font-bold text-slate-500">2021</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 flex-1 h-full justify-end">
+                        <span class="text-3xl font-black text-slate-700">37.8</span>
+                        <div class="chart-bar bg-gradient-to-t from-coral-300 to-coral-400" style="height: 57%;"></div>
+                        <span class="text-2xl font-bold text-slate-500">2022</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 flex-1 h-full justify-end">
+                        <span class="text-3xl font-black text-slate-700">40.0</span>
+                        <div class="chart-bar bg-gradient-to-t from-mint-300 to-mint-500" style="height: 61%;"></div>
+                        <span class="text-2xl font-bold text-slate-500">2023</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 flex-1 h-full justify-end">
+                        <span class="text-3xl font-black text-slate-700">44.5</span>
+                        <div class="chart-bar bg-gradient-to-t from-mint-300 to-mint-500" style="height: 68%;"></div>
+                        <span class="text-2xl font-bold text-slate-500">2024</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 flex-1 h-full justify-end">
+                        <span class="text-3xl font-black text-slate-700">50.2</span>
+                        <div class="chart-bar bg-gradient-to-t from-mint-300 to-mint-500" style="height: 77%;"></div>
+                        <span class="text-2xl font-bold text-slate-500">2025</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 flex-1 h-full justify-end">
+                        <span class="text-3xl font-black text-coral-600">57.5</span>
+                        <div class="chart-bar bg-gradient-to-t from-sun-400 to-coral-500 relative" style="height: 88%;">
+                            <span class="absolute -top-14 left-1/2 -translate-x-1/2 text-5xl">🚀</span>
+                        </div>
+                        <span class="text-2xl font-bold text-slate-500">2026</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-span-4 grid grid-cols-1 gap-3">
+            <div class="data-highlight">
+                <div class="num">+76,5%</div>
+                <div class="lbl">Tăng trưởng 2020 → 2026</div>
+                <div class="src">Mordor Intelligence</div>
+            </div>
+            <div class="data-highlight">
+                <div class="num">10,2%</div>
+                <div class="lbl">CAGR 2020–2026</div>
+                <div class="src">Mordor Intelligence</div>
+            </div>
+            <div class="data-highlight">
+                <div class="num">$57,5B</div>
+                <div class="lbl">Dự báo quy mô 2026</div>
+                <div class="src">Mordor Intelligence</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 7: VAI TRÒ VỚI NỀN KINH TẾ -->
+<div class="slide-container" data-slide="7">
+    <div class="text-center space-y-3 reveal-item effect-fade-up mb-4">
+        <span class="section-badge bg-mint-400 text-white">💼 PHẦN 2 · VAI TRÒ</span>
+        <h2 class="text-7xl font-black text-slate-800 font-display">VAI TRÒ VỚI NỀN KINH TẾ</h2>
+    </div>
+    <div class="grid grid-cols-4 gap-4 max-w-[1840px] mx-auto w-full mb-4">
+        <div class="paper-card p-6 rounded-3xl reveal-item effect-fade-up border-t-8 border-t-coral-400 text-center">
+            <div class="text-6xl mb-3">🏭</div>
+            <h3 class="font-black text-2xl text-slate-800 mb-3">Động lực sản xuất</h3>
+            <div class="big-number text-coral-500">45K+</div>
+            <p class="text-lg text-slate-600 leading-relaxed mt-2">DN kết nối SX với thị trường</p>
+            <span class="source-tag">VLA 10/2025</span>
+        </div>
+        <div class="paper-card p-6 rounded-3xl reveal-item effect-fade-up border-t-8 border-t-sun-400 text-center">
+            <div class="text-6xl mb-3">💹</div>
+            <h3 class="font-black text-2xl text-slate-800 mb-3">Thu hút FDI</h3>
+            <div class="big-number text-sun-500">$38,2B</div>
+            <p class="text-lg text-slate-600 leading-relaxed mt-2">Vốn FDI đăng ký 2024</p>
+            <span class="source-tag">Bộ KH&ĐT</span>
+        </div>
+        <div class="paper-card p-6 rounded-3xl reveal-item effect-fade-up border-t-8 border-t-mint-400 text-center">
+            <div class="text-6xl mb-3">🌐</div>
+            <h3 class="font-black text-2xl text-slate-800 mb-3">Hội nhập quốc tế</h3>
+            <div class="big-number text-mint-500">17 FTA</div>
+            <p class="text-lg text-slate-600 leading-relaxed mt-2">EVFTA, CPTPP, RCEP...</p>
+            <span class="source-tag">Bộ Công Thương</span>
+        </div>
+        <div class="paper-card p-6 rounded-3xl reveal-item effect-fade-up border-t-8 border-t-sky2-400 text-center">
+            <div class="text-6xl mb-3">👥</div>
+            <h3 class="font-black text-2xl text-slate-800 mb-3">Tạo việc làm</h3>
+            <div class="big-number text-sky2-500">2,5M</div>
+            <p class="text-lg text-slate-600 leading-relaxed mt-2">Lao động trực tiếp đến 2030</p>
+            <span class="source-tag">VietnamPlus 2025</span>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-3 gap-5 max-w-[1840px] mx-auto w-full mb-4 reveal-item effect-fade-up">
+        <div class="flex justify-center">
+            <div class="photo-frame" style="width: 560px; height: 240px;">
+                <div class="img-frame">
+                    <img src="nha-may.jpg" alt="Nhà máy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">🏭</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame tilt-right" style="width: 560px; height: 240px;">
+                <div class="img-frame">
+                    <img src="fdi.jpg" alt="FDI" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">💹</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame" style="width: 560px; height: 240px;">
+                <div class="img-frame">
+                    <img src="lao-dong.jpg" alt="Lao động" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">👥</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="paper-card p-5 rounded-3xl max-w-[1840px] mx-auto w-full reveal-item effect-fade-up border-l-8 border-l-sun-400">
+        <div class="flex items-center gap-3 mb-2">
+            <i data-lucide="quote" class="w-8 h-8 text-sun-500"></i>
+            <h3 class="font-black text-2xl text-slate-800">Đóng góp GDP</h3>
+        </div>
+        <p class="text-xl text-slate-600 leading-relaxed">
+            Logistics đóng góp <b class="text-sun-500">~10% GDP Việt Nam</b> (tương đương <b class="text-sun-500">45-50 tỷ USD/năm</b>) — phát biểu của Thủ tướng Phạm Minh Chính tại Diễn đàn Logistics VN 2025.
+        </p>
+        <span class="source-tag">Nguồn: VnExpress · 11/2025</span>
+    </div>
+</div>
+
+<!-- SLIDE 8: CHI PHÍ LOGISTICS -->
+<div class="slide-container" data-slide="8">
+    <div class="text-center space-y-3 reveal-item effect-fade-up mb-4">
+        <span class="section-badge bg-coral-400 text-white">💰 PHẦN 2 · CHI PHÍ</span>
+        <h2 class="text-7xl font-black text-slate-800 font-display">CHI PHÍ LOGISTICS VN SO VỚI KHU VỰC</h2>
+    </div>
+    <div class="grid grid-cols-4 gap-4 max-w-[1840px] mx-auto w-full mb-4">
+        <div class="stat-card reveal-item effect-zoom-in text-center">
+            <div class="big-number text-coral-500">16-17%</div>
+            <p class="text-2xl text-slate-600 mt-3 font-bold">Việt Nam</p>
+            <span class="source-tag">TT Phạm Minh Chính · 11/2025</span>
+        </div>
+        <div class="stat-card reveal-item effect-zoom-in text-center">
+            <div class="big-number text-sun-500">~11%</div>
+            <p class="text-2xl text-slate-600 mt-3 font-bold">Trung bình thế giới</p>
+            <span class="source-tag">World Bank 2024</span>
+        </div>
+        <div class="stat-card reveal-item effect-zoom-in text-center">
+            <div class="big-number text-mint-500">~8%</div>
+            <p class="text-2xl text-slate-600 mt-3 font-bold">Singapore</p>
+            <span class="source-tag">Thấp nhất khu vực</span>
+        </div>
+        <div class="stat-card reveal-item effect-zoom-in text-center">
+            <div class="big-number text-sky2-500">~12%</div>
+            <p class="text-2xl text-slate-600 mt-3 font-bold">Malaysia</p>
+            <span class="source-tag">Mức TB khu vực</span>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-4 gap-4 max-w-[1840px] mx-auto w-full mb-4 reveal-item effect-fade-up">
+        <div class="flex justify-center">
+            <div class="photo-frame" style="width: 420px; height: 210px;">
+                <div class="img-frame">
+                    <img src="duong-bo.jpg" alt="Đường bộ" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">🚛</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame tilt-right" style="width: 420px; height: 210px;">
+                <div class="img-frame">
+                    <img src="container-rong.jpg" alt="Container rỗng" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">📦</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame" style="width: 420px; height: 210px;">
+                <div class="img-frame">
+                    <img src="hai-quan.jpg" alt="Hải quan" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">🛃</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame tilt-right" style="width: 420px; height: 210px;">
+                <div class="img-frame">
+                    <img src="cang-bien.jpg" alt="Cảng biển" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">⚓</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-5 max-w-[1840px] mx-auto w-full reveal-item effect-fade-up">
+        <div class="paper-card p-5 rounded-3xl border-l-8 border-l-coral-400">
+            <div class="flex items-center gap-3 mb-3">
+                <i data-lucide="alert-circle" class="w-8 h-8 text-coral-500"></i>
+                <h3 class="font-black text-2xl text-slate-800">Thách thức</h3>
+            </div>
+            <ul class="text-lg text-slate-600 space-y-2 leading-relaxed">
+                <li>• Vận tải đường bộ chiếm <b class="text-coral-500">73-77%</b> <span class="source-tag-inline">VLA</span></li>
+                <li>• Mất cân đối container: <b class="text-coral-500">3:1</b> <span class="source-tag-inline">VNF</span></li>
+                <li>• Tái định vị container rỗng: <b class="text-coral-500">$85-170/cont</b> <span class="source-tag-inline">WB</span></li>
+            </ul>
+        </div>
+        <div class="paper-card p-5 rounded-3xl border-l-8 border-l-mint-400">
+            <div class="flex items-center gap-3 mb-3">
+                <i data-lucide="check-circle" class="w-8 h-8 text-mint-500"></i>
+                <h3 class="font-black text-2xl text-slate-800">Mục tiêu 2025-2035</h3>
+            </div>
+            <ul class="text-lg text-slate-600 space-y-2 leading-relaxed">
+                <li>• Giảm chi phí xuống <b class="text-mint-500">12-15% GDP</b> <span class="source-tag-inline">QĐ 200/2025</span></li>
+                <li>• Tỷ lệ thuê ngoài <b class="text-mint-500">70-80%</b> <span class="source-tag-inline">Bộ CT</span></li>
+                <li>• LPI vào <b class="text-mint-500">Top 40</b> thế giới <span class="source-tag-inline">Chiến lược QG</span></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 9: XẾP HẠNG QUỐC TẾ -->
+<div class="slide-container" data-slide="9">
+    <div class="text-center space-y-3 reveal-item effect-fade-up mb-5">
+        <span class="section-badge bg-lilac-400 text-white">🏆 PHẦN 2 · XẾP HẠNG</span>
+        <h2 class="text-7xl font-black text-slate-800 font-display">XẾP HẠNG QUỐC TẾ CỦA VIỆT NAM</h2>
+    </div>
+    <div class="grid grid-cols-2 gap-6 max-w-[1840px] mx-auto w-full mb-5">
+        <div class="paper-card p-7 rounded-3xl reveal-item effect-fade-left border-t-8 border-t-coral-400">
+            <div class="flex items-center gap-4 mb-4">
+                <div class="p-4 bg-coral-300/30 rounded-2xl text-coral-600"><i data-lucide="bar-chart-2" class="w-12 h-12"></i></div>
+                <h3 class="font-black text-3xl text-slate-800">LPI - World Bank 2023</h3>
+            </div>
+            <div class="big-number text-coral-500 mb-4">43/139</div>
+            <p class="text-xl text-slate-600 leading-relaxed">
+                Đạt <b class="text-coral-500">3,3/5 điểm</b> — tăng <b class="text-coral-500">4 bậc</b> so với 2018. Xếp hạng <b class="text-coral-500">Top 5 ASEAN</b>.
+            </p>
+            <span class="source-tag">Nguồn: World Bank LPI 2023</span>
+        </div>
+        <div class="paper-card p-7 rounded-3xl reveal-item effect-fade-right border-t-8 border-t-mint-400">
+            <div class="flex items-center gap-4 mb-4">
+                <div class="p-4 bg-mint-300/30 rounded-2xl text-mint-500"><i data-lucide="award" class="w-12 h-12"></i></div>
+                <h3 class="font-black text-3xl text-slate-800">Agility Emerging 2024</h3>
+            </div>
+            <div class="big-number text-mint-500 mb-4">Top 8/50</div>
+            <p class="text-xl text-slate-600 leading-relaxed">
+                Xếp <b class="text-mint-500">thứ 8/50</b> thị trường mới nổi, <b class="text-mint-500">thứ 4</b> về chỉ số cơ hội logistics quốc tế.
+            </p>
+            <span class="source-tag">Nguồn: Agility 2024</span>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-4 gap-4 max-w-[1840px] mx-auto w-full mb-4 reveal-item effect-fade-up">
+        <div class="flex justify-center">
+            <div class="photo-frame" style="width: 420px; height: 210px;">
+                <div class="img-frame">
+                    <img src="world-bank.jpg" alt="World Bank" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">🌍</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame tilt-right" style="width: 420px; height: 210px;">
+                <div class="img-frame">
+                    <img src="asean.jpg" alt="ASEAN" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">🏳️</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame" style="width: 420px; height: 210px;">
+                <div class="img-frame">
+                    <img src="lpi-chart.jpg" alt="LPI Chart" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">📊</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame tilt-right" style="width: 420px; height: 210px;">
+                <div class="img-frame">
+                    <img src="cang-cai-mep.jpg" alt="Cảng Cái Mép" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">⚓</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-4 gap-4 max-w-[1840px] mx-auto w-full reveal-item effect-fade-up">
+        <div class="data-highlight">
+            <div class="num">Top 5</div>
+            <div class="lbl">ASEAN</div>
+            <div class="src">World Bank</div>
+        </div>
+        <div class="data-highlight">
+            <div class="num">Top 50</div>
+            <div class="lbl">Thế giới về LPI</div>
+            <div class="src">WB 2023</div>
+        </div>
+        <div class="data-highlight">
+            <div class="num">Top 10</div>
+            <div class="lbl">Thị trường mới nổi</div>
+            <div class="src">Agility 2024</div>
+        </div>
+        <div class="data-highlight">
+            <div class="num">Top 4</div>
+            <div class="lbl">Logistics Opportunity</div>
+            <div class="src">Agility 2024</div>
+        </div>
+    </div>
+</div>
+
+<!-- ================================ PHẦN 3: VẬN HÀNH ================================ -->
+
+<!-- SLIDE 10: 6 MẢNG TỔNG QUAN -->
+<div class="slide-container" data-slide="10">
+    <div class="text-center space-y-3 reveal-item effect-fade-up mb-4">
+        <span class="section-badge bg-coral-400 text-white">💼 PHẦN 3 · VẬN HÀNH</span>
+        <h2 class="text-7xl font-black text-slate-800 font-display">6 MẢNG HOẠT ĐỘNG CỐT LÕI</h2>
+    </div>
+    <div class="grid grid-cols-3 gap-4 max-w-[1840px] mx-auto w-full mb-4">
+        <div class="paper-card p-5 rounded-2xl reveal-item effect-fade-up border-l-8 border-l-coral-400">
+            <div class="flex items-center gap-3 mb-2">
+                <div class="p-3 bg-coral-300/30 rounded-xl text-coral-600"><i data-lucide="warehouse" class="w-9 h-9"></i></div>
+                <h3 class="font-black text-2xl text-slate-800">1. Kho Bãi</h3>
+            </div>
+            <p class="text-lg text-slate-600 mb-2 leading-relaxed">WMS, AGV/AMR, kho tự động hóa</p>
+            <div class="big-number text-coral-500" style="font-size:48px;">20%/năm</div>
+            <p class="text-base text-slate-500">Nhu cầu kho lạnh</p>
+            <span class="source-tag">Bộ NN&PTNT</span>
+        </div>
+        <div class="paper-card p-5 rounded-2xl reveal-item effect-fade-up border-l-8 border-l-mint-400">
+            <div class="flex items-center gap-3 mb-2">
+                <div class="p-3 bg-mint-300/30 rounded-xl text-mint-500"><i data-lucide="truck" class="w-9 h-9"></i></div>
+                <h3 class="font-black text-2xl text-slate-800">2. Vận Tải</h3>
+            </div>
+            <p class="text-lg text-slate-600 mb-2 leading-relaxed">Đa phương thức đa dạng</p>
+            <div class="big-number text-mint-500" style="font-size:48px;">2,5 tỷ</div>
+            <p class="text-base text-slate-500">Tấn hàng hóa 2024</p>
+            <span class="source-tag">Bộ GTVT</span>
+        </div>
+        <div class="paper-card p-5 rounded-2xl reveal-item effect-fade-up border-l-8 border-l-sun-400">
+            <div class="flex items-center gap-3 mb-2">
+                <div class="p-3 bg-sun-300/40 rounded-xl text-sun-500"><i data-lucide="ship" class="w-9 h-9"></i></div>
+                <h3 class="font-black text-2xl text-slate-800">3. Giao Nhận</h3>
+            </div>
+            <p class="text-lg text-slate-600 mb-2 leading-relaxed">Forwarding, booking tàu</p>
+            <div class="big-number text-sun-500" style="font-size:48px;">2.000+</div>
+            <p class="text-base text-slate-500">Forwarder VN</p>
+            <span class="source-tag">VLA 2025</span>
+        </div>
+        <div class="paper-card p-5 rounded-2xl reveal-item effect-fade-up border-l-8 border-l-sky2-400">
+            <div class="flex items-center gap-3 mb-2">
+                <div class="p-3 bg-sky2-400/30 rounded-xl text-sky2-500"><i data-lucide="file-check-2" class="w-9 h-9"></i></div>
+                <h3 class="font-black text-2xl text-slate-800">4. Hải Quan</h3>
+            </div>
+            <p class="text-lg text-slate-600 mb-2 leading-relaxed">HS Code, C/O, VNACCS</p>
+            <div class="big-number text-sky2-500" style="font-size:48px;">1,6M</div>
+            <p class="text-base text-slate-500">Tờ khai XNK 2025</p>
+            <span class="source-tag">TCHQ 12/2025</span>
+        </div>
+        <div class="paper-card p-5 rounded-2xl reveal-item effect-fade-up border-l-8 border-l-lilac-400">
+            <div class="flex items-center gap-3 mb-2">
+                <div class="p-3 bg-purple-300/30 rounded-xl text-purple-500"><i data-lucide="git-merge" class="w-9 h-9"></i></div>
+                <h3 class="font-black text-2xl text-slate-800">5. Hoạch Định</h3>
+            </div>
+            <p class="text-lg text-slate-600 mb-2 leading-relaxed">S&OP, tồn kho, sản xuất</p>
+            <div class="big-number text-purple-500" style="font-size:48px;">20-30%</div>
+            <p class="text-base text-slate-500">Giảm tồn kho nhờ S&OP</p>
+            <span class="source-tag">Gartner</span>
+        </div>
+        <div class="paper-card p-5 rounded-2xl reveal-item effect-fade-up border-l-8 border-l-pink-400">
+            <div class="flex items-center gap-3 mb-2">
+                <div class="p-3 bg-pink-300/30 rounded-xl text-pink-500"><i data-lucide="rotate-ccw" class="w-9 h-9"></i></div>
+                <h3 class="font-black text-2xl text-slate-800">6. Logistics Ngược</h3>
+            </div>
+            <p class="text-lg text-slate-600 mb-2 leading-relaxed">Last-Mile, đổi trả, thu hồi</p>
+            <div class="big-number text-pink-500" style="font-size:48px;">5-10%</div>
+            <p class="text-base text-slate-500">Tỷ lệ đổi trả TMĐT</p>
+            <span class="source-tag">Metric 2025</span>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-6 gap-3 max-w-[1840px] mx-auto w-full reveal-item effect-fade-up">
+        <div class="flex justify-center">
+            <div class="photo-frame" style="width: 285px; height: 150px;">
+                <div class="img-frame">
+                    <img src="kho-bai.jpg" alt="Kho bãi" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none; font-size:70px;">🏭</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame tilt-right" style="width: 285px; height: 150px;">
+                <div class="img-frame">
+                    <img src="xe-tai.jpg" alt="Xe tải" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none; font-size:70px;">🚛</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame" style="width: 285px; height: 150px;">
+                <div class="img-frame">
+                    <img src="tau-container.jpg" alt="Tàu container" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none; font-size:70px;">🚢</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame tilt-right" style="width: 285px; height: 150px;">
+                <div class="img-frame">
+                    <img src="hai-quan.jpg" alt="Hải quan" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none; font-size:70px;">🛃</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame" style="width: 285px; height: 150px;">
+                <div class="img-frame">
+                    <img src="phan-tich.jpg" alt="Phân tích" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none; font-size:70px;">📊</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame tilt-right" style="width: 285px; height: 150px;">
+                <div class="img-frame">
+                    <img src="giao-hang.jpg" alt="Giao hàng" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none; font-size:70px;">📦</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 11: VẬN TẢI CHI TIẾT -->
+<div class="slide-container" data-slide="11">
+    <div class="text-center space-y-3 reveal-item effect-fade-up mb-4">
+        <span class="section-badge bg-mint-400 text-white">🚛 PHẦN 3 · VẬN TẢI</span>
+        <h2 class="text-7xl font-black text-slate-800 font-display">VẬN TẢI ĐA PHƯƠNG THỨC</h2>
+    </div>
+    <div class="grid grid-cols-4 gap-4 max-w-[1840px] mx-auto w-full mb-4">
+        <div class="paper-card p-5 rounded-2xl reveal-item effect-fade-up border-t-8 border-t-coral-400">
+            <div class="text-5xl mb-2">🚛</div>
+            <h3 class="font-black text-2xl text-slate-800 mb-2">Đường bộ</h3>
+            <div class="big-number text-coral-500" style="font-size:44px;">73-77%</div>
+            <p class="text-lg text-slate-600 mb-2">Khối lượng nội địa</p>
+            <div class="big-number text-coral-500" style="font-size:36px;">25.000</div>
+            <p class="text-base text-slate-600 mb-2">Chuyến container/ngày</p>
+            <span class="source-tag">Bộ GTVT 2025</span>
+        </div>
+        <div class="paper-card p-5 rounded-2xl reveal-item effect-fade-up border-t-8 border-t-sky2-400">
+            <div class="text-5xl mb-2">🚢</div>
+            <h3 class="font-black text-2xl text-slate-800 mb-2">Đường biển</h3>
+            <div class="big-number text-sky2-500" style="font-size:44px;">864,4</div>
+            <p class="text-lg text-slate-600 mb-2">Triệu tấn (2024)</p>
+            <div class="big-number text-sky2-500" style="font-size:36px;">34,36</div>
+            <p class="text-base text-slate-600 mb-2">Triệu TEU (2025)</p>
+            <span class="source-tag">Cục Hàng hải VN</span>
+        </div>
+        <div class="paper-card p-5 rounded-2xl reveal-item effect-fade-up border-t-8 border-t-sun-400">
+            <div class="text-5xl mb-2">✈️</div>
+            <h3 class="font-black text-2xl text-slate-800 mb-2">Hàng không</h3>
+            <div class="big-number text-sun-500" style="font-size:44px;">1,5</div>
+            <p class="text-lg text-slate-600 mb-2">Triệu tấn (+18,5%)</p>
+            <div class="big-number text-sun-500" style="font-size:36px;">83,5</div>
+            <p class="text-base text-slate-600 mb-2">Triệu lượt khách</p>
+            <span class="source-tag">Cục Hàng không VN</span>
+        </div>
+        <div class="paper-card p-5 rounded-2xl reveal-item effect-fade-up border-t-8 border-t-mint-400">
+            <div class="text-5xl mb-2">🚂</div>
+            <h3 class="font-black text-2xl text-slate-800 mb-2">Đường sắt</h3>
+            <div class="big-number text-mint-500" style="font-size:44px;">6,3</div>
+            <p class="text-lg text-slate-600 mb-2">Triệu tấn (2024)</p>
+            <div class="big-number text-mint-500" style="font-size:36px;">+25%</div>
+            <p class="text-base text-slate-600 mb-2">Tuyến liên vận</p>
+            <span class="source-tag">Tổng CT ĐSVN</span>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-4 gap-4 max-w-[1840px] mx-auto w-full reveal-item effect-fade-up">
+        <div class="flex justify-center">
+            <div class="photo-frame" style="width: 420px; height: 220px;">
+                <div class="img-frame">
+                    <img src="duong-bo.jpg" alt="Đường bộ" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">🚛</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame tilt-right" style="width: 420px; height: 220px;">
+                <div class="img-frame">
+                    <img src="cang-cat-lai.jpg" alt="Cảng Cát Lái" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">🚢</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame" style="width: 420px; height: 220px;">
+                <div class="img-frame">
+                    <img src="san-bay.jpg" alt="Sân bay" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">✈️</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame tilt-right" style="width: 420px; height: 220px;">
+                <div class="img-frame">
+                    <img src="duong-sat.jpg" alt="Đường sắt" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">🚂</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 12: KHO BÃI & HẢI QUAN -->
+<div class="slide-container" data-slide="12">
+    <div class="text-center space-y-3 reveal-item effect-fade-up mb-4">
+        <span class="section-badge bg-sun-400 text-white">🏭 PHẦN 3 · KHO BÃI & HẢI QUAN</span>
+        <h2 class="text-7xl font-black text-slate-800 font-display">KHO BÃI & THỦ TỤC HẢI QUAN</h2>
+    </div>
+    <div class="grid grid-cols-2 gap-5 max-w-[1840px] mx-auto w-full mb-4">
+        <div class="paper-card p-6 rounded-3xl reveal-item effect-fade-left border-t-8 border-t-coral-400">
+            <div class="flex items-center gap-3 mb-3">
+                <div class="p-3 bg-coral-300/30 rounded-2xl text-coral-600"><i data-lucide="warehouse" class="w-10 h-10"></i></div>
+                <h3 class="font-black text-3xl text-slate-800">Kho Bãi Hiện Đại</h3>
+            </div>
+            <div class="grid grid-cols-3 gap-2 mb-3">
+                <div class="data-highlight" style="min-height:100px; padding:14px 8px;">
+                    <div class="num" style="font-size:32px;">3.000ha</div>
+                    <div class="lbl" style="font-size:13px;">Kho bãi</div>
+                </div>
+                <div class="data-highlight" style="min-height:100px; padding:14px 8px;">
+                    <div class="num" style="font-size:32px;">1.500ha</div>
+                    <div class="lbl" style="font-size:13px;">Kho lạnh</div>
+                </div>
+                <div class="data-highlight" style="min-height:100px; padding:14px 8px;">
+                    <div class="num" style="font-size:32px;">40%</div>
+                    <div class="lbl" style="font-size:13px;">Tiết kiệm điện</div>
+                </div>
+            </div>
+            <ul class="text-lg text-slate-600 space-y-1 leading-relaxed">
+                <li>✓ <b>WMS</b> — Quản lý kho</li>
+                <li>✓ <b>AGV/AMR</b> — Robot tự động</li>
+                <li>✓ <b>AS/RS</b> — Lưu trữ tự động</li>
+                <li>✓ <b>Cold chain</b> — Kho lạnh</li>
+            </ul>
+            <span class="source-tag">Nguồn: Bộ Công Thương 2025</span>
+        </div>
+        <div class="paper-card p-6 rounded-3xl reveal-item effect-fade-right border-t-8 border-t-sky2-400">
+            <div class="flex items-center gap-3 mb-3">
+                <div class="p-3 bg-sky2-400/30 rounded-2xl text-sky2-500"><i data-lucide="file-check-2" class="w-10 h-10"></i></div>
+                <h3 class="font-black text-3xl text-slate-800">Thủ Tục Hải Quan</h3>
+            </div>
+            <div class="grid grid-cols-3 gap-2 mb-3">
+                <div class="data-highlight" style="min-height:100px; padding:14px 8px;">
+                    <div class="num" style="font-size:32px;">1,6M</div>
+                    <div class="lbl" style="font-size:13px;">Tờ khai 2025</div>
+                </div>
+                <div class="data-highlight" style="min-height:100px; padding:14px 8px;">
+                    <div class="num" style="font-size:32px;">99%</div>
+                    <div class="lbl" style="font-size:13px;">Điện tử</div>
+                </div>
+                <div class="data-highlight" style="min-height:100px; padding:14px 8px;">
+                    <div class="num" style="font-size:32px;">24/7</div>
+                    <div class="lbl" style="font-size:13px;">VNACCS</div>
+                </div>
+            </div>
+            <ul class="text-lg text-slate-600 space-y-1 leading-relaxed">
+                <li>✓ Khai báo <b>HS Code</b></li>
+                <li>✓ <b>C/O</b> — Chứng nhận xuất xứ</li>
+                <li>✓ <b>VNACCS/VCIS</b> — Điện tử</li>
+                <li>✓ <b>Thuế XNK</b> — Thanh toán</li>
+            </ul>
+            <span class="source-tag">Nguồn: TCHQ 12/2025</span>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-4 gap-4 max-w-[1840px] mx-auto w-full reveal-item effect-fade-up">
+        <div class="flex justify-center">
+            <div class="photo-frame" style="width: 420px; height: 220px;">
+                <div class="img-frame">
+                    <img src="kho-bai.jpg" alt="Kho bãi" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">🏭</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame tilt-right" style="width: 420px; height: 220px;">
+                <div class="img-frame">
+                    <img src="kho-lanh.jpg" alt="Kho lạnh" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">❄️</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame" style="width: 420px; height: 220px;">
+                <div class="img-frame">
+                    <img src="hai-quan.jpg" alt="Hải quan" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">🛃</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame tilt-right" style="width: 420px; height: 220px;">
+                <div class="img-frame">
+                    <img src="vnaccs.jpg" alt="VNACCS" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">💻</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 13: LOGISTICS NGƯỢC -->
+<div class="slide-container" data-slide="13">
+    <div class="text-center space-y-3 reveal-item effect-fade-up mb-4">
+        <span class="section-badge bg-lilac-400 text-white">🔄 PHẦN 3 · LOGISTICS NGƯỢC</span>
+        <h2 class="text-7xl font-black text-slate-800 font-display">LOGISTICS NGƯỢC & LAST-MILE</h2>
+    </div>
+    <div class="grid grid-cols-4 gap-4 max-w-[1840px] mx-auto w-full mb-4">
+        <div class="paper-card p-5 rounded-2xl reveal-item effect-fade-up border-t-8 border-t-coral-400 text-center">
+            <div class="text-5xl mb-2">📦</div>
+            <h3 class="font-black text-2xl text-slate-800 mb-2">Last-Mile</h3>
+            <div class="big-number text-coral-500" style="font-size:48px;">53%</div>
+            <p class="text-lg text-slate-600 mb-2">Chi phí vận chuyển</p>
+            <span class="source-tag">Capgemini 2024</span>
+        </div>
+        <div class="paper-card p-5 rounded-2xl reveal-item effect-fade-up border-t-8 border-t-mint-400 text-center">
+            <div class="text-5xl mb-2">↩️</div>
+            <h3 class="font-black text-2xl text-slate-800 mb-2">Reverse</h3>
+            <div class="big-number text-mint-500" style="font-size:48px;">5-10%</div>
+            <p class="text-lg text-slate-600 mb-2">Tỷ lệ đổi trả TMĐT</p>
+            <span class="source-tag">Metric.vn 2025</span>
+        </div>
+        <div class="paper-card p-5 rounded-2xl reveal-item effect-fade-up border-t-8 border-t-sun-400 text-center">
+            <div class="text-5xl mb-2">🌱</div>
+            <h3 class="font-black text-2xl text-slate-800 mb-2">Green</h3>
+            <div class="big-number text-sun-500" style="font-size:48px;">30%</div>
+            <p class="text-lg text-slate-600 mb-2">Mục tiêu giảm CO2 2030</p>
+            <span class="source-tag">COP26 VN</span>
+        </div>
+        <div class="paper-card p-5 rounded-2xl reveal-item effect-fade-up border-t-8 border-t-sky2-400 text-center">
+            <div class="text-5xl mb-2">⏱️</div>
+            <h3 class="font-black text-2xl text-slate-800 mb-2">Same-day</h3>
+            <div class="big-number text-sky2-500" style="font-size:42px;">~2 ngày</div>
+            <p class="text-lg text-slate-600 mb-2">Giao hàng TMĐT TB</p>
+            <span class="source-tag">iPrice 2025</span>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-4 gap-4 max-w-[1840px] mx-auto w-full reveal-item effect-fade-up">
+        <div class="flex justify-center">
+            <div class="photo-frame" style="width: 420px; height: 220px;">
+                <div class="img-frame">
+                    <img src="last-mile.jpg" alt="Last-Mile" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">🚚</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame tilt-right" style="width: 420px; height: 220px;">
+                <div class="img-frame">
+                    <img src="doi-tra.jpg" alt="Đổi trả" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">↩️</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame" style="width: 420px; height: 220px;">
+                <div class="img-frame">
+                    <img src="green-logistics.jpg" alt="Green" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">🌱</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame tilt-right" style="width: 420px; height: 220px;">
+                <div class="img-frame">
+                    <img src="giao-hang-nhanh.jpg" alt="Same-day" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">⚡</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ================================ PHẦN 4: CÔNG NGHỆ ================================ -->
+
+<!-- SLIDE 14: AI & CHUYỂN ĐỔI SỐ -->
+<div class="slide-container" data-slide="14">
+    <div class="text-center space-y-3 reveal-item effect-fade-up mb-4">
+        <span class="section-badge bg-lilac-400 text-white">🤖 PHẦN 4 · CÔNG NGHỆ</span>
+        <h2 class="text-7xl font-black text-slate-800 font-display">AI & CHUYỂN ĐỔI SỐ</h2>
+    </div>
+    <div class="grid grid-cols-3 gap-5 max-w-[1840px] mx-auto w-full mb-4">
+        <div class="paper-card p-6 rounded-3xl reveal-item effect-fade-left border-t-8 border-t-lilac-400">
+            <div class="text-5xl mb-3">🤖</div>
+            <h3 class="font-black text-2xl text-slate-800 mb-3">Trí Tuệ Nhân Tạo</h3>
+            <div class="big-number text-purple-500" style="font-size:48px;">~15%</div>
+            <p class="text-lg text-slate-600 mb-3">Giảm chi phí logistics</p>
+            <div class="big-number text-purple-500" style="font-size:48px;">35%</div>
+            <p class="text-lg text-slate-600 mb-2">Giảm tồn kho</p>
+            <span class="source-tag">McKinsey 2024</span>
+        </div>
+        <div class="paper-card p-6 rounded-3xl reveal-item effect-fade-up border-t-8 border-t-mint-400">
+            <div class="text-5xl mb-3">📊</div>
+            <h3 class="font-black text-2xl text-slate-800 mb-3">Tác Động AI</h3>
+            <div class="big-number text-mint-500" style="font-size:48px;">65%</div>
+            <p class="text-lg text-slate-600 mb-3">Tăng mức độ dịch vụ</p>
+            <div class="big-number text-mint-500" style="font-size:48px;">82%</div>
+            <p class="text-lg text-slate-600 mb-2">DN dùng AI 2026</p>
+            <span class="source-tag">Gartner 2024</span>
+        </div>
+        <div class="paper-card p-6 rounded-3xl reveal-item effect-fade-right border-t-8 border-t-sky2-400">
+            <div class="text-5xl mb-3">📡</div>
+            <h3 class="font-black text-2xl text-slate-800 mb-3">IoT & Blockchain</h3>
+            <div class="big-number text-sky2-500" style="font-size:48px;">75%</div>
+            <p class="text-lg text-slate-600 mb-3">DN dùng IoT 2026</p>
+            <div class="big-number text-sky2-500" style="font-size:48px;">$3,4B</div>
+            <p class="text-lg text-slate-600 mb-2">Blockchain SCM 2030</p>
+            <span class="source-tag">MarketsandMarkets</span>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-3 gap-5 max-w-[1840px] mx-auto w-full mb-4 reveal-item effect-fade-up">
+        <div class="flex justify-center">
+            <div class="photo-frame" style="width: 560px; height: 230px;">
+                <div class="img-frame">
+                    <img src="ai-logistics.jpg" alt="AI Logistics" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">🤖</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame tilt-right" style="width: 560px; height: 230px;">
+                <div class="img-frame">
+                    <img src="iot-sensor.jpg" alt="IoT" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">📡</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame" style="width: 560px; height: 230px;">
+                <div class="img-frame">
+                    <img src="blockchain.jpg" alt="Blockchain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">🔗</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="paper-card p-5 rounded-3xl max-w-[1840px] mx-auto w-full reveal-item effect-fade-up border-l-8 border-l-coral-400">
+        <div class="flex items-center gap-3 mb-2">
+            <i data-lucide="target" class="w-8 h-8 text-coral-500"></i>
+            <h3 class="font-black text-2xl text-slate-800">Case study: Viettel Logistics Lạng Sơn</h3>
+        </div>
+        <p class="text-xl text-slate-600 leading-relaxed">
+            AI giúp giảm <b class="text-coral-500">410 kg CO2/ngày</b> (≈149,7 tấn/năm) và tiết kiệm <b class="text-coral-500">4,59 triệu VNĐ/ngày</b> (~1,675 tỷ/năm).
+        </p>
+        <span class="source-tag">Nguồn: Tạp chí Khoa học Đại Nam 2025</span>
+    </div>
+</div>
+
+<!-- SLIDE 15: GREEN LOGISTICS -->
+<div class="slide-container" data-slide="15">
+    <div class="text-center space-y-3 reveal-item effect-fade-up mb-4">
+        <span class="section-badge bg-mint-400 text-white">🌱 PHẦN 4 · BỀN VỮNG</span>
+        <h2 class="text-7xl font-black text-slate-800 font-display">LOGISTICS XANH 2026</h2>
+    </div>
+    <div class="grid grid-cols-4 gap-4 max-w-[1840px] mx-auto w-full mb-4">
+        <div class="paper-card p-5 rounded-2xl reveal-item effect-fade-up border-t-8 border-t-mint-400 text-center">
+            <div class="text-5xl mb-2">🔋</div>
+            <h3 class="font-black text-2xl text-slate-800 mb-2">Xe điện</h3>
+            <div class="big-number text-mint-500" style="font-size:44px;">30-50%</div>
+            <p class="text-lg text-slate-600">Giảm phát thải</p>
+        </div>
+        <div class="paper-card p-5 rounded-2xl reveal-item effect-fade-up border-t-8 border-t-sun-400 text-center">
+            <div class="text-5xl mb-2">♻️</div>
+            <h3 class="font-black text-2xl text-slate-800 mb-2">Bao bì tái chế</h3>
+            <div class="big-number text-sun-500" style="font-size:44px;">70%</div>
+            <p class="text-lg text-slate-600">Bao bì tái chế</p>
+        </div>
+        <div class="paper-card p-5 rounded-2xl reveal-item effect-fade-up border-t-8 border-t-sky2-400 text-center">
+            <div class="text-5xl mb-2">🌳</div>
+            <h3 class="font-black text-2xl text-slate-800 mb-2">Carbon neutral</h3>
+            <div class="big-number text-sky2-500" style="font-size:44px;">2050</div>
+            <p class="text-lg text-slate-600">Cam kết Net Zero</p>
+        </div>
+        <div class="paper-card p-5 rounded-2xl reveal-item effect-fade-up border-t-8 border-t-coral-400 text-center">
+            <div class="text-5xl mb-2">💡</div>
+            <h3 class="font-black text-2xl text-slate-800 mb-2">Kho thông minh</h3>
+            <div class="big-number text-coral-500" style="font-size:44px;">40%</div>
+            <p class="text-lg text-slate-600">Tiết kiệm điện</p>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-3 gap-5 max-w-[1840px] mx-auto w-full mb-4 reveal-item effect-fade-up">
+        <div class="flex justify-center">
+            <div class="photo-frame" style="width: 560px; height: 230px;">
+                <div class="img-frame">
+                    <img src="xe-dien.jpg" alt="Xe điện" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">🔋</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame tilt-right" style="width: 560px; height: 230px;">
+                <div class="img-frame">
+                    <img src="bao-bi-xanh.jpg" alt="Bao bì xanh" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">♻️</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame" style="width: 560px; height: 230px;">
+                <div class="img-frame">
+                    <img src="nang-luong-mat-troi.jpg" alt="Năng lượng mặt trời" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">☀️</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-5 max-w-[1840px] mx-auto w-full reveal-item effect-fade-up">
+        <div class="paper-card p-5 rounded-3xl border-l-8 border-l-mint-400">
+            <h3 class="font-black text-2xl text-slate-800 mb-2">🌏 FIATA World Congress 2025</h3>
+            <p class="text-xl text-slate-600 leading-relaxed">
+                Tổ chức tại Hà Nội (10/2025) — quy tụ <b class="text-mint-500">1.200 đại biểu</b> từ <b class="text-mint-500">150 quốc gia</b>.
+            </p>
+            <span class="source-tag">VLA / FIATA 2025</span>
+        </div>
+        <div class="paper-card p-5 rounded-3xl border-l-8 border-l-sky2-400">
+            <h3 class="font-black text-2xl text-slate-800 mb-2">📋 Cam kết Việt Nam</h3>
+            <p class="text-xl text-slate-600 leading-relaxed">
+                COP26: <b class="text-sky2-500">Net Zero vào 2050</b>. Logistics đóng góp <b class="text-sky2-500">~8-10%</b> phát thải.
+            </p>
+            <span class="source-tag">Bộ TN&MT 2025</span>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 16: TMĐT & CROSS-BORDER -->
+<div class="slide-container" data-slide="16">
+    <div class="text-center space-y-3 reveal-item effect-fade-up mb-4">
+        <span class="section-badge bg-sun-400 text-white">🛒 PHẦN 4 · TMĐT</span>
+        <h2 class="text-7xl font-black text-slate-800 font-display">TMĐT & CROSS-BORDER LOGISTICS</h2>
+    </div>
+    <div class="grid grid-cols-4 gap-4 max-w-[1840px] mx-auto w-full mb-4">
+        <div class="stat-card reveal-item effect-zoom-in text-center">
+            <div class="big-number text-coral-500">$31B</div>
+            <p class="text-xl text-slate-600 mt-3 font-bold">Quy mô TMĐT VN 2025</p>
+            <span class="source-tag">+25,5% · Báo cáo TMĐT 2026</span>
+        </div>
+        <div class="stat-card reveal-item effect-zoom-in text-center">
+            <div class="big-number text-sun-500">60M</div>
+            <p class="text-xl text-slate-600 mt-3 font-bold">Người tiêu dùng online</p>
+            <span class="source-tag">~60% dân số · VECOM 2025</span>
+        </div>
+        <div class="stat-card reveal-item effect-zoom-in text-center">
+            <div class="big-number text-mint-500">430K</div>
+            <p class="text-xl text-slate-600 mt-3 font-bold">Tỷ VNĐ chi mua online</p>
+            <span class="source-tag">3,9 tỷ sản phẩm · Metric 2025</span>
+        </div>
+        <div class="stat-card reveal-item effect-zoom-in text-center">
+            <div class="big-number text-sky2-500">+26%</div>
+            <p class="text-xl text-slate-600 mt-3 font-bold">Tăng trưởng TMĐT 2025</p>
+            <span class="source-tag">So với 2024</span>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-4 gap-4 max-w-[1840px] mx-auto w-full mb-4 reveal-item effect-fade-up">
+        <div class="flex justify-center">
+            <div class="photo-frame" style="width: 420px; height: 220px;">
+                <div class="img-frame">
+                    <img src="shopee.jpg" alt="Shopee" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">🛒</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame tilt-right" style="width: 420px; height: 220px;">
+                <div class="img-frame">
+                    <img src="fulfillment.jpg" alt="Fulfillment" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">📦</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame" style="width: 420px; height: 220px;">
+                <div class="img-frame">
+                    <img src="air-cargo.jpg" alt="Air cargo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">✈️</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame tilt-right" style="width: 420px; height: 220px;">
+                <div class="img-frame">
+                    <img src="shipper.jpg" alt="Shipper" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">🚚</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-3 gap-5 max-w-[1840px] mx-auto w-full reveal-item effect-fade-up">
+        <div class="paper-card p-5 rounded-2xl border-l-8 border-l-coral-400">
+            <h3 class="font-black text-2xl text-slate-800 mb-2">📦 Fulfillment</h3>
+            <p class="text-lg text-slate-600">Shopee, Lazada, Tiki đầu tư trung tâm hoàn thiện đơn hàng tự động.</p>
+        </div>
+        <div class="paper-card p-5 rounded-2xl border-l-8 border-l-mint-400">
+            <h3 class="font-black text-2xl text-slate-800 mb-2">✈️ Air Cross-border</h3>
+            <p class="text-lg text-slate-600">Chuyến bay hàng TMĐT tăng <b class="text-mint-500">40%/năm</b>.</p>
+        </div>
+        <div class="paper-card p-5 rounded-2xl border-l-8 border-l-sun-400">
+            <h3 class="font-black text-2xl text-slate-800 mb-2">🚚 Last-Mile Racing</h3>
+            <p class="text-lg text-slate-600">Giao 2h, 4h, same-day — tiêu chuẩn mới.</p>
+        </div>
+    </div>
+</div>
+
+<!-- ================================ PHẦN 5: NGHỀ NGHIỆP ================================ -->
+
+<!-- SLIDE 17: CƠ HỘI VIỆC LÀM -->
+<div class="slide-container" data-slide="17">
+    <div class="text-center space-y-3 reveal-item effect-fade-up mb-4">
+        <span class="section-badge bg-coral-400 text-white">🚀 PHẦN 5 · NGHỀ NGHIỆP</span>
+        <h2 class="text-7xl font-black text-slate-800 font-display">CƠ HỘI VIỆC LÀM RỘNG MỞ</h2>
+    </div>
+
+    <div class="grid grid-cols-4 gap-4 max-w-[1840px] mx-auto w-full mb-4">
+        <div class="data-highlight">
+            <div class="num">15-20%</div>
+            <div class="lbl">Nhu cầu tăng/năm</div>
+            <div class="src">LIRC 2025</div>
+        </div>
+        <div class="data-highlight">
+            <div class="num">2,5M</div>
+            <div class="lbl">Lao động cần đến 2030</div>
+            <div class="src">VietnamPlus</div>
+        </div>
+        <div class="data-highlight">
+            <div class="num">8-10%</div>
+            <div class="lbl">Đáp ứng được nhu cầu</div>
+            <div class="src">LIRC</div>
+        </div>
+        <div class="data-highlight">
+            <div class="num">85,7%</div>
+            <div class="lbl">DN phải tự đào tạo</div>
+            <div class="src">VietnamPlus 2025</div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-5 max-w-[1840px] mx-auto w-full mb-4">
+        <div class="paper-card p-6 rounded-3xl reveal-item effect-fade-left border-t-8 border-t-mint-400">
+            <div class="text-5xl mb-3">🌟</div>
+            <h3 class="font-black text-3xl text-slate-800 mb-3">Nhu cầu nhân lực</h3>
+            <ul class="text-xl text-slate-600 space-y-2 leading-relaxed">
+                <li>✓ Nhu cầu tăng <b class="text-mint-500">15-20%/năm</b></li>
+                <li>✓ Cần <b class="text-mint-500">2,5 triệu</b> lao động vào 2030</li>
+                <li>✓ Hiện chỉ đáp ứng <b class="text-mint-500">8-10%</b></li>
+            </ul>
+        </div>
+        <div class="paper-card p-6 rounded-3xl reveal-item effect-fade-right border-t-8 border-t-coral-400">
+            <div class="text-5xl mb-3">🏢</div>
+            <h3 class="font-black text-3xl text-slate-800 mb-3">Môi trường làm việc</h3>
+            <ul class="text-xl text-slate-600 space-y-2 leading-relaxed">
+                <li>🚢 Cảng biển, hãng tàu, forwarder</li>
+                <li>🏭 Kho bãi, trung tâm phân phối</li>
+                <li>🛫 Hãng hàng không, công ty vận tải</li>
+                <li>💻 Tập đoàn TMĐT, Logistics 4.0</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-4 gap-4 max-w-[1840px] mx-auto w-full reveal-item effect-fade-up">
+        <div class="flex justify-center">
+            <div class="photo-frame" style="width: 420px; height: 200px;">
+                <div class="img-frame">
+                    <img src="van-phong.jpg" alt="Văn phòng" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">🏢</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame tilt-right" style="width: 420px; height: 200px;">
+                <div class="img-frame">
+                    <img src="lam-viec-nhom.jpg" alt="Làm việc nhóm" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">👥</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame" style="width: 420px; height: 200px;">
+                <div class="img-frame">
+                    <img src="cong-nghe.jpg" alt="Công nghệ" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">💻</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame tilt-right" style="width: 420px; height: 200px;">
+                <div class="img-frame">
+                    <img src="cang-lam-viec.jpg" alt="Cảng làm việc" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">⚓</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 18: VỊ TRÍ CÔNG VIỆC -->
+<div class="slide-container" data-slide="18">
+    <div class="text-center space-y-3 reveal-item effect-fade-up mb-4">
+        <span class="section-badge bg-coral-400 text-white">💼 PHẦN 5 · VỊ TRÍ</span>
+        <h2 class="text-7xl font-black text-slate-800 font-display">CÁC VỊ TRÍ CÔNG VIỆC PHỔ BIẾN</h2>
+    </div>
+    <div class="grid grid-cols-3 gap-4 max-w-[1840px] mx-auto w-full mb-4">
+        <div class="paper-card p-5 rounded-2xl reveal-item effect-fade-up border-l-8 border-l-coral-400">
+            <div class="flex items-center gap-3 mb-2">
+                <i data-lucide="briefcase" class="w-9 h-9 text-coral-600"></i>
+                <h3 class="font-black text-2xl text-slate-800">Lữ hành & HDV</h3>
+            </div>
+            <p class="text-lg text-slate-600 mb-2">Điều hành tour, HDV du lịch</p>
+            <div class="big-number text-coral-500" style="font-size:36px;">7-15 Tr</div>
+        </div>
+        <div class="paper-card p-5 rounded-2xl reveal-item effect-fade-up border-l-8 border-l-mint-400">
+            <div class="flex items-center gap-3 mb-2">
+                <i data-lucide="hotel" class="w-9 h-9 text-mint-500"></i>
+                <h3 class="font-black text-2xl text-slate-800">Dịch vụ lưu trú</h3>
+            </div>
+            <p class="text-lg text-slate-600 mb-2">Quản lý khách sạn, Lễ tân</p>
+            <div class="big-number text-mint-500" style="font-size:36px;">8-20 Tr</div>
+        </div>
+        <div class="paper-card p-5 rounded-2xl reveal-item effect-fade-up border-l-8 border-l-sun-400">
+            <div class="flex items-center gap-3 mb-2">
+                <i data-lucide="utensils" class="w-9 h-9 text-sun-500"></i>
+                <h3 class="font-black text-2xl text-slate-800">Dịch vụ ẩm thực</h3>
+            </div>
+            <p class="text-lg text-slate-600 mb-2">Quản lý nhà hàng, Bếp trưởng</p>
+            <div class="big-number text-sun-500" style="font-size:36px;">8-25 Tr</div>
+        </div>
+        <div class="paper-card p-5 rounded-2xl reveal-item effect-fade-up border-l-8 border-l-sky2-400">
+            <div class="flex items-center gap-3 mb-2">
+                <i data-lucide="plane" class="w-9 h-9 text-sky2-500"></i>
+                <h3 class="font-black text-2xl text-slate-800">Vận chuyển</h3>
+            </div>
+            <p class="text-lg text-slate-600 mb-2">Phi công, Tiếp viên, Tài xế</p>
+            <div class="big-number text-sky2-500" style="font-size:36px;">12-50 Tr</div>
+        </div>
+        <div class="paper-card p-5 rounded-2xl reveal-item effect-fade-up border-l-8 border-l-lilac-400">
+            <div class="flex items-center gap-3 mb-2">
+                <i data-lucide="party-popper" class="w-9 h-9 text-purple-500"></i>
+                <h3 class="font-black text-2xl text-slate-800">Sự kiện</h3>
+            </div>
+            <p class="text-lg text-slate-600 mb-2">Tổ chức sự kiện, khu vui chơi</p>
+            <div class="big-number text-purple-500" style="font-size:36px;">10-25 Tr</div>
+        </div>
+        <div class="paper-card p-5 rounded-2xl reveal-item effect-fade-up border-l-8 border-l-pink-400">
+            <div class="flex items-center gap-3 mb-2">
+                <i data-lucide="megaphone" class="w-9 h-9 text-pink-500"></i>
+                <h3 class="font-black text-2xl text-slate-800">Marketing</h3>
+            </div>
+            <p class="text-lg text-slate-600 mb-2">Truyền thông, Digital Marketing</p>
+            <div class="big-number text-pink-500" style="font-size:36px;">10-30 Tr</div>
+        </div>
+    </div>
+
+    <div class="paper-card p-4 rounded-3xl max-w-[1840px] mx-auto w-full reveal-item effect-fade-up border-l-8 border-l-sky2-400 mb-4">
+        <div class="flex items-center gap-3 mb-2">
+            <i data-lucide="target" class="w-8 h-8 text-sky2-500"></i>
+            <h3 class="font-black text-xl text-slate-800">Vị trí thuộc ngành Logistics (10 vị trí)</h3>
+        </div>
+        <p class="text-lg text-slate-600 leading-relaxed">
+            Chuyên viên Khai báo Hải quan · Nhân viên Chứng từ · Sales Logistics · Chuyên viên Mua hàng · Nhân viên Kho vận · Chuyên viên Hoạch định · Chuyên viên Chuỗi cung ứng · Chuyên viên Điều độ vận tải · Kinh doanh hãng tàu · CSKH quốc tế
+        </p>
+    </div>
+
+    <div class="grid grid-cols-4 gap-4 max-w-[1840px] mx-auto w-full reveal-item effect-fade-up">
+        <div class="flex justify-center">
+            <div class="photo-frame" style="width: 420px; height: 160px;">
+                <div class="img-frame">
+                    <img src="hai-quan-vien.jpg" alt="Hải quan" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none; font-size:70px;">🛃</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame tilt-right" style="width: 420px; height: 160px;">
+                <div class="img-frame">
+                    <img src="sales.jpg" alt="Sales" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none; font-size:70px;">📞</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame" style="width: 420px; height: 160px;">
+                <div class="img-frame">
+                    <img src="kho-van.jpg" alt="Kho vận" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none; font-size:70px;">📦</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame tilt-right" style="width: 420px; height: 160px;">
+                <div class="img-frame">
+                    <img src="planner.jpg" alt="Planner" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none; font-size:70px;">📊</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 19: THU NHẬP -->
+<div class="slide-container" data-slide="19">
+    <div class="text-center space-y-2 reveal-item effect-fade-up mb-4">
+        <span class="section-badge bg-sun-400 text-white">💰 PHẦN 5 · THU NHẬP</span>
+        <h2 class="text-7xl font-black text-slate-800 font-display">MỨC THU NHẬP THEO CẤP BẬC</h2>
+    </div>
+    <div class="grid grid-cols-4 gap-4 max-w-[1840px] mx-auto w-full mb-4">
+        <div class="paper-card p-5 rounded-3xl reveal-item effect-fade-left border-t-8 border-t-coral-400">
+            <span class="text-lg px-3 py-1 rounded-full bg-coral-300/30 text-coral-600 font-bold">0 - 2 Năm</span>
+            <h3 class="font-black text-2xl text-slate-800 mt-3">Fresher</h3>
+            <div class="big-number text-coral-500 my-3">8-12 Tr</div>
+            <p class="text-lg text-slate-600 mb-2">Nhân viên kho, chứng từ.</p>
+            <span class="source-tag">TTU 12/2025</span>
+        </div>
+        <div class="paper-card p-5 rounded-3xl reveal-item effect-fade-up border-t-8 border-t-sun-400">
+            <span class="text-lg px-3 py-1 rounded-full bg-sun-300/40 text-sun-600 font-bold">2 - 5 Năm</span>
+            <h3 class="font-black text-2xl text-slate-800 mt-3">Specialist</h3>
+            <div class="big-number text-sun-500 my-3">15-32 Tr</div>
+            <p class="text-lg text-slate-600 mb-2">Sales, Hải quan.</p>
+            <span class="source-tag">RGF HR Agent 2025</span>
+        </div>
+        <div class="paper-card p-5 rounded-3xl reveal-item effect-fade-up border-t-8 border-t-mint-400">
+            <span class="text-lg px-3 py-1 rounded-full bg-mint-300/30 text-mint-600 font-bold">5+ Năm</span>
+            <h3 class="font-black text-2xl text-slate-800 mt-3">Manager</h3>
+            <div class="big-number text-mint-500 my-3">25-40 Tr</div>
+            <p class="text-lg text-slate-600 mb-2">Giám sát, Quản lý vận hành.</p>
+            <span class="source-tag">TTU 2025</span>
+        </div>
+        <div class="paper-card p-5 rounded-3xl reveal-item effect-fade-right border-t-8 border-t-sky2-400">
+            <span class="text-lg px-3 py-1 rounded-full bg-sky2-400/30 text-sky2-600 font-bold">Cấp cao</span>
+            <h3 class="font-black text-2xl text-slate-800 mt-3">Director</h3>
+            <div class="big-number text-sky2-500 my-3">50-100+ Tr</div>
+            <p class="text-lg text-slate-600 mb-2">GĐ Chuỗi cung ứng.</p>
+            <span class="source-tag">Indeed VN 2025</span>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-3 gap-5 max-w-[1840px] mx-auto w-full mb-4 reveal-item effect-fade-up">
+        <div class="flex justify-center">
+            <div class="photo-frame" style="width: 560px; height: 210px;">
+                <div class="img-frame">
+                    <img src="fresher.jpg" alt="Fresher" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">🎯</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame tilt-right" style="width: 560px; height: 210px;">
+                <div class="img-frame">
+                    <img src="manager.jpg" alt="Manager" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">💼</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame" style="width: 560px; height: 210px;">
+                <div class="img-frame">
+                    <img src="director.jpg" alt="Director" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">👑</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-3 gap-4 max-w-[1840px] mx-auto w-full reveal-item effect-fade-up">
+        <div class="data-highlight">
+            <div class="num">~15%</div>
+            <div class="lbl">Tăng lương TB/năm</div>
+            <div class="src">TTU 2025</div>
+        </div>
+        <div class="data-highlight">
+            <div class="num">~3-5</div>
+            <div class="lbl">Năm lên Supervisor</div>
+            <div class="src">RGF 2025</div>
+        </div>
+        <div class="data-highlight">
+            <div class="num">~$2.000</div>
+            <div class="lbl">Director hàng đầu/tháng</div>
+            <div class="src">Indeed VN</div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 20: LỘ TRÌNH THĂNG TIẾN -->
+<div class="slide-container" data-slide="20">
+    <div class="text-center space-y-3 reveal-item effect-fade-up mb-5">
+        <span class="section-badge bg-mint-400 text-white">📈 PHẦN 5 · LỘ TRÌNH</span>
+        <h2 class="text-7xl font-black text-slate-800 font-display">LỘ TRÌNH THĂNG TIẾN SỰ NGHIỆP</h2>
+    </div>
+    <div class="grid grid-cols-5 gap-4 max-w-[1840px] mx-auto w-full mb-5">
+        <div class="paper-card p-5 rounded-2xl reveal-item effect-fade-up border-t-8 border-t-coral-400 text-center">
+            <div class="text-6xl mb-2">🎯</div>
+            <h3 class="font-black text-2xl text-slate-800 mb-1">Fresher</h3>
+            <p class="text-base text-slate-500 font-bold">0-2 năm</p>
+            <div class="big-number text-coral-500 mt-3" style="font-size:36px;">8-12 Tr</div>
+            <p class="text-base text-slate-600 mt-2">Học quy trình, làm quen hệ thống.</p>
+        </div>
+        <div class="paper-card p-5 rounded-2xl reveal-item effect-fade-up border-t-8 border-t-sun-400 text-center">
+            <div class="text-6xl mb-2">⭐</div>
+            <h3 class="font-black text-2xl text-slate-800 mb-1">Specialist</h3>
+            <p class="text-base text-slate-500 font-bold">2-5 năm</p>
+            <div class="big-number text-sun-500 mt-3" style="font-size:36px;">15-32 Tr</div>
+            <p class="text-base text-slate-600 mt-2">Chuyên môn hóa 1 mảng.</p>
+        </div>
+        <div class="paper-card p-5 rounded-2xl reveal-item effect-fade-up border-t-8 border-t-mint-400 text-center">
+            <div class="text-6xl mb-2">🏆</div>
+            <h3 class="font-black text-2xl text-slate-800 mb-1">Supervisor</h3>
+            <p class="text-base text-slate-500 font-bold">5-8 năm</p>
+            <div class="big-number text-mint-500 mt-3" style="font-size:36px;">25-40 Tr</div>
+            <p class="text-base text-slate-600 mt-2">Quản lý nhóm, đào tạo.</p>
+        </div>
+        <div class="paper-card p-5 rounded-2xl reveal-item effect-fade-up border-t-8 border-t-sky2-400 text-center">
+            <div class="text-6xl mb-2">💼</div>
+            <h3 class="font-black text-2xl text-slate-800 mb-1">Manager</h3>
+            <p class="text-base text-slate-500 font-bold">8-12 năm</p>
+            <div class="big-number text-sky2-500 mt-3" style="font-size:36px;">40-70 Tr</div>
+            <p class="text-base text-slate-600 mt-2">Chiến lược phòng ban.</p>
+        </div>
+        <div class="paper-card p-5 rounded-2xl reveal-item effect-fade-up border-t-8 border-lilac-400 text-center">
+            <div class="text-6xl mb-2">👑</div>
+            <h3 class="font-black text-2xl text-slate-800 mb-1">Director</h3>
+            <p class="text-base text-slate-500 font-bold">12+ năm</p>
+            <div class="big-number text-purple-500 mt-3" style="font-size:36px;">50-100+ Tr</div>
+            <p class="text-base text-slate-600 mt-2">Định hướng chiến lược.</p>
+        </div>
+    </div>
+
+    <div class="flex justify-center reveal-item effect-fade-up">
+        <div class="photo-frame" style="width: 1600px; height: 220px;">
+            <div class="img-frame">
+                <img src="career-path.jpg" alt="Career Path" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="fallback-icon" style="display:none;">📈</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ================================ PHẦN 6: ĐÀO TẠO ================================ -->
+
+<!-- SLIDE 21: TRƯỜNG ĐẠI HỌC -->
+<div class="slide-container" data-slide="21">
+    <div class="text-center space-y-3 reveal-item effect-fade-up mb-4">
+        <span class="section-badge bg-coral-400 text-white">🎓 PHẦN 6 · ĐÀO TẠO</span>
+        <h2 class="text-7xl font-black text-slate-800 font-display">CÁC TRƯỜNG ĐẠI HỌC HÀNG ĐẦU</h2>
+        <p class="text-2xl text-slate-600">Điểm chuẩn 2025 · Tổ hợp: A00, A01, D01, D07, D90</p>
+    </div>
+    <div class="grid grid-cols-3 gap-5 max-w-[1840px] mx-auto w-full mb-4">
+        <div class="paper-card p-5 rounded-3xl reveal-item effect-fade-left border-t-8 border-t-coral-400">
+            <div class="flex items-center justify-between mb-3">
+                <h3 class="font-black text-3xl text-slate-800">🏛️ Miền Bắc</h3>
+                <span class="text-base px-3 py-1 bg-coral-300/30 text-coral-600 rounded-full font-bold">Hà Nội - HP</span>
+            </div>
+            <ul class="space-y-2 text-xl text-slate-700">
+                <li class="p-3 bg-cream-50 rounded-lg border border-coral-200/50 flex justify-between"><span>🎓 ĐH Ngoại Thương</span><span class="font-black text-coral-500">28,5</span></li>
+                <li class="p-3 bg-cream-50 rounded-lg border border-coral-200/50 flex justify-between"><span>🎓 ĐH KT Quốc dân</span><span class="font-black text-coral-500">28,61</span></li>
+                <li class="p-3 bg-cream-50 rounded-lg border border-coral-200/50 flex justify-between"><span>🎓 ĐH GTVT</span><span class="font-black text-coral-500">27,52</span></li>
+                <li class="p-3 bg-cream-50 rounded-lg border border-coral-200/50 flex justify-between"><span>🎓 ĐH Hàng Hải VN</span><span class="font-black text-coral-500">24,5+</span></li>
+            </ul>
+        </div>
+        <div class="paper-card p-5 rounded-3xl reveal-item effect-fade-up border-t-8 border-t-sun-400">
+            <div class="flex items-center justify-between mb-3">
+                <h3 class="font-black text-3xl text-slate-800">🏖️ Miền Trung</h3>
+                <span class="text-base px-3 py-1 bg-sun-300/40 text-sun-600 rounded-full font-bold">ĐN - Huế</span>
+            </div>
+            <ul class="space-y-2 text-xl text-slate-700">
+                <li class="p-3 bg-cream-50 rounded-lg border border-sun-200/50 flex justify-between"><span>🎓 ĐH Kinh tế - ĐHĐN</span><span class="font-black text-sun-500">25,2</span></li>
+                <li class="p-3 bg-cream-50 rounded-lg border border-sun-200/50 flex justify-between"><span>🎓 ĐH Duy Tân</span><span class="font-black text-sun-500">22,5</span></li>
+                <li class="p-3 bg-cream-50 rounded-lg border border-sun-200/50 flex justify-between"><span>🎓 ĐH Huế</span><span class="font-black text-sun-500">21,0</span></li>
+                <li class="p-3 bg-cream-50 rounded-lg border border-sun-200/50 flex justify-between"><span>🎓 ĐH Nha Trang</span><span class="font-black text-sun-500">20,5</span></li>
+            </ul>
+        </div>
+        <div class="paper-card p-5 rounded-3xl reveal-item effect-fade-right border-t-8 border-t-mint-400">
+            <div class="flex items-center justify-between mb-3">
+                <h3 class="font-black text-3xl text-slate-800">🌆 Miền Nam</h3>
+                <span class="text-base px-3 py-1 bg-mint-300/40 text-mint-600 rounded-full font-bold">TP.HCM</span>
+            </div>
+            <ul class="space-y-2 text-xl text-slate-700">
+                <li class="p-3 bg-cream-50 rounded-lg border border-mint-200/50 flex justify-between"><span>🎓 ĐH GTVT TP.HCM</span><span class="font-black text-mint-500">27,38</span></li>
+                <li class="p-3 bg-cream-50 rounded-lg border border-mint-200/50 flex justify-between"><span>🎓 ĐH Bách Khoa</span><span class="font-black text-mint-500">26,2+</span></li>
+                <li class="p-3 bg-cream-50 rounded-lg border border-mint-200/50 flex justify-between"><span>🎓 ĐH Kinh tế TP.HCM</span><span class="font-black text-mint-500">26,8+</span></li>
+                <li class="p-3 bg-cream-50 rounded-lg border border-mint-200/50 flex justify-between"><span>🎓 ĐH CN TP.HCM</span><span class="font-black text-mint-500">24,5</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-4 gap-4 max-w-[1840px] mx-auto w-full reveal-item effect-fade-up">
+        <div class="flex justify-center">
+            <div class="photo-frame" style="width: 420px; height: 200px;">
+                <div class="img-frame">
+                    <img src="ftu.jpg" alt="FTU" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">🏛️</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame tilt-right" style="width: 420px; height: 200px;">
+                <div class="img-frame">
+                    <img src="neu.jpg" alt="NEU" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">🎓</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame" style="width: 420px; height: 200px;">
+                <div class="img-frame">
+                    <img src="vmu.jpg" alt="VMU" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">⚓</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame tilt-right" style="width: 420px; height: 200px;">
+                <div class="img-frame">
+                    <img src="uth.jpg" alt="UTH" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">🎓</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 22: CHỨNG CHỈ QUỐC TẾ -->
+<div class="slide-container" data-slide="22">
+    <div class="text-center space-y-3 reveal-item effect-fade-up mb-4">
+        <span class="section-badge bg-sun-400 text-white">🏆 PHẦN 6 · CHỨNG CHỈ</span>
+        <h2 class="text-7xl font-black text-slate-800 font-display">CHỨNG CHỈ QUỐC TẾ GIÁ TRỊ</h2>
+        <p class="text-2xl text-slate-600">Bảo chứng năng lực cạnh tranh trong các tập đoàn đa quốc gia</p>
+    </div>
+    <div class="grid grid-cols-2 gap-5 max-w-[1840px] mx-auto w-full mb-4">
+        <div class="paper-card p-6 rounded-3xl reveal-item effect-fade-left border-l-8 border-l-coral-400">
+            <div class="flex items-center gap-4 mb-3">
+                <i data-lucide="award" class="w-10 h-10 text-coral-500"></i>
+                <h3 class="font-black text-3xl text-slate-800">FIATA Diploma</h3>
+            </div>
+            <p class="text-xl text-slate-600 leading-relaxed mb-3">Liên đoàn Giao nhận Vận tải Quốc tế cấp, giá trị toàn cầu về Forwarding.</p>
+            <div class="big-number text-coral-500" style="font-size:42px;">150+ quốc gia</div>
+            <span class="source-tag">FIATA 1926</span>
+        </div>
+        <div class="paper-card p-6 rounded-3xl reveal-item effect-fade-right border-l-8 border-l-mint-400">
+            <div class="flex items-center gap-4 mb-3">
+                <i data-lucide="award" class="w-10 h-10 text-mint-500"></i>
+                <h3 class="font-black text-3xl text-slate-800">ASCM CPIM</h3>
+            </div>
+            <p class="text-xl text-slate-600 leading-relaxed mb-3">Certified in Planning and Inventory Management — chuẩn mực thế giới.</p>
+            <div class="big-number text-mint-500" style="font-size:42px;">30.000+</div>
+            <span class="source-tag">ASCM — chứng nhận/năm</span>
+        </div>
+        <div class="paper-card p-6 rounded-3xl reveal-item effect-fade-left border-l-8 border-l-sun-400">
+            <div class="flex items-center gap-4 mb-3">
+                <i data-lucide="award" class="w-10 h-10 text-sun-500"></i>
+                <h3 class="font-black text-3xl text-slate-800">ASCM CSCP</h3>
+            </div>
+            <p class="text-xl text-slate-600 leading-relaxed mb-3">Certified Supply Chain Professional — cho cấp quản lý chuỗi cung ứng.</p>
+            <div class="big-number text-sun-500" style="font-size:42px;">Top 10</div>
+            <span class="source-tag">Chứng chỉ toàn cầu</span>
+        </div>
+        <div class="paper-card p-6 rounded-3xl reveal-item effect-fade-right border-l-8 border-l-sky2-400">
+            <div class="flex items-center gap-4 mb-3">
+                <i data-lucide="award" class="w-10 h-10 text-sky2-500"></i>
+                <h3 class="font-black text-3xl text-slate-800">CILT Chartered Member</h3>
+            </div>
+            <p class="text-xl text-slate-600 leading-relaxed mb-3">Chứng nhận từ Hiệp hội Vận tải và Logistics Hoàng gia Anh Quốc.</p>
+            <div class="big-number text-sky2-500" style="font-size:42px;">1919</div>
+            <span class="source-tag">Thành lập tại Anh</span>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-4 gap-4 max-w-[1840px] mx-auto w-full reveal-item effect-fade-up">
+        <div class="flex justify-center">
+            <div class="photo-frame" style="width: 420px; height: 200px;">
+                <div class="img-frame">
+                    <img src="fiata.jpg" alt="FIATA" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">🏆</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame tilt-right" style="width: 420px; height: 200px;">
+                <div class="img-frame">
+                    <img src="ascm.jpg" alt="ASCM" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">📜</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame" style="width: 420px; height: 200px;">
+                <div class="img-frame">
+                    <img src="cilt.jpg" alt="CILT" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">👑</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame tilt-right" style="width: 420px; height: 200px;">
+                <div class="img-frame">
+                    <img src="certificate.jpg" alt="Certificate" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">🎖️</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 23: KỸ NĂNG -->
+<div class="slide-container" data-slide="23">
+    <div class="text-center space-y-3 reveal-item effect-fade-up mb-5">
+        <span class="section-badge bg-lilac-400 text-white">🌟 PHẦN 6 · KỸ NĂNG</span>
+        <h2 class="text-7xl font-black text-slate-800 font-display">KỸ NĂNG CỐT LÕI ĐỂ BỨT PHÁ</h2>
+    </div>
+    <div class="grid grid-cols-2 gap-5 max-w-[1840px] mx-auto w-full mb-4">
+        <div class="paper-card p-6 rounded-3xl reveal-item effect-zoom-in">
+            <div class="flex items-center gap-3 mb-3">
+                <i data-lucide="languages" class="w-12 h-12 text-sky2-500"></i>
+                <h3 class="font-black text-3xl text-slate-800">Ngoại Ngữ</h3>
+            </div>
+            <p class="text-xl text-slate-600 leading-relaxed mb-3">IELTS 6.5+ hoặc Tiếng Trung/Nhật/Hàn.</p>
+            <div class="big-number text-sky2-500" style="font-size:48px;">78%</div>
+            <p class="text-lg text-slate-500">DN yêu cầu ngoại ngữ</p>
+            <span class="source-tag">TTU 2025</span>
+        </div>
+        <div class="paper-card p-6 rounded-3xl reveal-item effect-zoom-in">
+            <div class="flex items-center gap-3 mb-3">
+                <i data-lucide="bar-chart-3" class="w-12 h-12 text-mint-500"></i>
+                <h3 class="font-black text-3xl text-slate-800">Phân Tích Dữ Liệu</h3>
+            </div>
+            <p class="text-xl text-slate-600 leading-relaxed mb-3">Excel Advanced, Power BI, SQL.</p>
+            <div class="big-number text-mint-500" style="font-size:48px;">Top 3</div>
+            <p class="text-lg text-slate-500">Kỹ năng quan trọng 2025</p>
+            <span class="source-tag">Gartner 2025</span>
+        </div>
+        <div class="paper-card p-6 rounded-3xl reveal-item effect-zoom-in">
+            <div class="flex items-center gap-3 mb-3">
+                <i data-lucide="database" class="w-12 h-12 text-purple-500"></i>
+                <h3 class="font-black text-3xl text-slate-800">ERP & Công Nghệ</h3>
+            </div>
+            <p class="text-xl text-slate-600 leading-relaxed mb-3">SAP, Oracle WMS, VNACCS.</p>
+            <div class="big-number text-purple-500" style="font-size:48px;">92%</div>
+            <p class="text-lg text-slate-500">Fortune 500 dùng SAP</p>
+            <span class="source-tag">SAP 2025</span>
+        </div>
+        <div class="paper-card p-6 rounded-3xl reveal-item effect-zoom-in">
+            <div class="flex items-center gap-3 mb-3">
+                <i data-lucide="handshake" class="w-12 h-12 text-sun-500"></i>
+                <h3 class="font-black text-3xl text-slate-800">Đàm Phán</h3>
+            </div>
+            <p class="text-xl text-slate-600 leading-relaxed mb-3">Thương lượng cước tàu, hợp đồng, khủng hoảng.</p>
+            <div class="big-number text-sun-500" style="font-size:48px;">Top 5</div>
+            <p class="text-lg text-slate-500">Kỹ năng mềm LinkedIn</p>
+            <span class="source-tag">LinkedIn 2025</span>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-4 gap-4 max-w-[1840px] mx-auto w-full reveal-item effect-fade-up">
+        <div class="flex justify-center">
+            <div class="photo-frame" style="width: 420px; height: 200px;">
+                <div class="img-frame">
+                    <img src="ngoai-ngu.jpg" alt="Ngoại ngữ" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">🗣️</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame tilt-right" style="width: 420px; height: 200px;">
+                <div class="img-frame">
+                    <img src="data-analytics.jpg" alt="Data" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">📊</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame" style="width: 420px; height: 200px;">
+                <div class="img-frame">
+                    <img src="erp.jpg" alt="ERP" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">💻</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="photo-frame tilt-right" style="width: 420px; height: 200px;">
+                <div class="img-frame">
+                    <img src="negotiation.jpg" alt="Negotiation" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display:none;">🤝</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ================================ PHẦN 7: KẾT LUẬN ================================ -->
+
+<!-- SLIDE 24: TỔNG KẾT -->
+<div class="slide-container" data-slide="24">
+    <div class="text-center space-y-3 reveal-item effect-fade-up mb-5">
+        <span class="section-badge bg-mint-400 text-white">✅ PHẦN 7 · TỔNG KẾT</span>
+        <h2 class="text-7xl font-black text-slate-800 font-display">TỔNG KẾT & HÀNH ĐỘNG</h2>
+    </div>
+    <div class="grid grid-cols-4 gap-4 max-w-[1840px] mx-auto w-full mb-5">
+        <div class="paper-card p-6 rounded-3xl reveal-item effect-fade-up border-t-8 border-t-coral-400 text-center">
+            <div class="text-6xl mb-3">📚</div>
+            <h3 class="font-black text-2xl text-slate-800 mb-2">Học tập</h3>
+            <p class="text-lg text-slate-600">Chọn đúng trường, chuyên ngành.</p>
+        </div>
+        <div class="paper-card p-6 rounded-3xl reveal-item effect-fade-up border-t-8 border-t-sun-400 text-center">
+            <div class="text-6xl mb-3">🛠️</div>
+            <h3 class="font-black text-2xl text-slate-800 mb-2">Kỹ năng</h3>
+            <p class="text-lg text-slate-600">Trau dồi ngoại ngữ, chứng chỉ.</p>
+        </div>
+        <div class="paper-card p-6 rounded-3xl reveal-item effect-fade-up border-t-8 border-t-mint-400 text-center">
+            <div class="text-6xl mb-3">🤝</div>
+            <h3 class="font-black text-2xl text-slate-800 mb-2">Trải nghiệm</h3>
+            <p class="text-lg text-slate-600">Thực tập tại cảng, forwarder.</p>
+        </div>
+        <div class="paper-card p-6 rounded-3xl reveal-item effect-fade-up border-t-8 border-t-sky2-400 text-center">
+            <div class="text-6xl mb-3">🎯</div>
+            <h3 class="font-black text-2xl text-slate-800 mb-2">Định hướng</h3>
+            <p class="text-lg text-slate-600">Chọn mảng chuyên môn phù hợp.</p>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-3 gap-4 max-w-[1840px] mx-auto w-full mb-4 reveal-item effect-fade-up">
+        <div class="data-highlight">
+            <div class="num">2,5 triệu</div>
+            <div class="lbl">Vị trí cần tuyển đến 2030</div>
+            <div class="src">VietnamPlus</div>
+        </div>
+        <div class="data-highlight">
+            <div class="num">$76,39B</div>
+            <div class="lbl">Quy mô thị trường 2031</div>
+            <div class="src">Mordor Intelligence</div>
+        </div>
+        <div class="data-highlight">
+            <div class="num">Top 40</div>
+            <div class="lbl">LPI mục tiêu 2035</div>
+            <div class="src">Chiến lược QG</div>
+        </div>
+    </div>
+
+    <div class="paper-card p-6 rounded-3xl max-w-[1840px] mx-auto w-full reveal-item effect-fade-up border-l-8 border-l-sun-400">
+        <div class="flex items-center gap-3 mb-3">
+            <i data-lucide="sparkles" class="w-10 h-10 text-sun-500"></i>
+            <h3 class="font-black text-3xl text-slate-800">Thông điệp quan trọng</h3>
+        </div>
+        <p class="text-2xl text-slate-600 leading-relaxed">
+            Logistics không chỉ là "chở hàng" — mà là <b class="text-sun-500">nghệ thuật tối ưu hóa dòng chảy của nền kinh tế</b>. Với <b class="text-sun-500">2,5 triệu vị trí</b> cần tuyển trong thập kỷ tới, đây là thời điểm vàng để bạn gia nhập ngành!
+        </p>
+    </div>
+</div>
+
+<!-- SLIDE 25: THANK YOU -->
+<div class="slide-container" data-slide="25">
+    <div class="text-center space-y-8 reveal-item effect-blur-reveal max-w-7xl mx-auto">
+        <div class="flex justify-center items-center gap-10 text-[140px] mb-4">
+            <span>🚚</span><span>📦</span><span>💖</span>
+        </div>
+        <h2 class="text-[160px] font-black text-slate-800 font-display tracking-tight leading-tight">
+            THANK YOU <br/>
+            <span class="text-coral-500 wavy-underline">FOR LISTENING!</span>
+        </h2>
+        <p class="text-slate-600 text-5xl font-medium">
+            Cảm ơn thầy cô và các bạn đã lắng nghe 💐
+        </p>
+        <div class="flex justify-center gap-8 pt-4 text-7xl">
+            <span>🎈</span><span>🌟</span><span>🎊</span><span>🧡</span><span>🎈</span>
+        </div>
+        <p class="text-4xl text-slate-500 italic pt-4">— Q & A —</p>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div class="ui-footer fullscreen-hide">
+    <div class="flex-1 flex items-center gap-4">
+        <span class="text-base font-bold text-slate-600 whitespace-nowrap">Tiến độ</span>
+        <div class="flex-1 max-w-md h-3 bg-cream-200 rounded-full overflow-hidden border-2 border-coral-200">
+            <div id="progress-bar" class="h-full bg-gradient-to-r from-coral-400 via-sun-400 to-mint-400 transition-all duration-500 rounded-full" style="width: 4%"></div>
+        </div>
+        <span class="text-base font-bold text-slate-600 whitespace-nowrap">
+            <span id="current-slide-num">1</span> / <span id="total-slide-num">25</span>
+        </span>
+    </div>
+    <div class="flex items-center space-x-4">
+        <button id="prev-btn" class="px-6 py-2.5 rounded-xl bg-white border-2 border-coral-200 hover:border-coral-400 text-slate-600 hover:text-coral-500 font-bold text-base flex items-center space-x-2 transition disabled:opacity-40 disabled:cursor-not-allowed shadow-sm">
+            <i data-lucide="chevron-left" class="w-5 h-5"></i><span>Trang Trước</span>
+        </button>
+        <button id="next-btn" class="px-7 py-2.5 rounded-xl bg-gradient-to-r from-coral-400 to-sun-400 text-white font-black text-base flex items-center space-x-2 shadow-lg hover:opacity-90 transition">
+            <span>Kế Tiếp</span><i data-lucide="chevron-right" class="w-5 h-5"></i>
+        </button>
+    </div>
+</div>
+
+<!-- TOC MODAL -->
+<div id="toc-modal" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="paper-card w-full max-w-3xl rounded-3xl p-8 shadow-2xl space-y-5 max-h-[85vh] overflow-hidden flex flex-col">
+        <div class="flex justify-between items-center border-b-2 border-dashed border-coral-200 pb-4">
+            <h3 class="font-black text-2xl text-slate-800 flex items-center space-x-3">
+                <i data-lucide="list-ordered" class="w-7 h-7 text-coral-500"></i><span>Mục Lục Trình Chiếu</span>
+            </h3>
+            <button id="close-toc-btn" class="p-2 rounded-xl text-slate-400 hover:text-coral-500 hover:bg-coral-50 transition">
+                <i data-lucide="x" class="w-7 h-7"></i>
+            </button>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 overflow-y-auto pr-2" id="toc-list"></div>
+    </div>
+</div>
+
+</div>
+</div>
+
+<script>
+const DESIGN_W = 1920;
+const DESIGN_H = 1080;
+
+function fitStage() {
+    const stage = document.getElementById('stage');
+    const wrap = document.getElementById('stage-wrap');
+    const w = wrap.clientWidth;
+    const h = wrap.clientHeight;
+    const scale = Math.min(w / DESIGN_W, h / DESIGN_H);
+    const offsetX = (w - DESIGN_W * scale) / 2;
+    const offsetY = (h - DESIGN_H * scale) / 2;
+    stage.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
+}
+
+window.addEventListener('resize', fitStage);
+window.addEventListener('orientationchange', fitStage);
+
+document.addEventListener('DOMContentLoaded', () => {
+    lucide.createIcons();
+    fitStage();
+
+    const slides = document.querySelectorAll('.slide-container');
+    const totalSlides = slides.length;
+    let currentSlideIndex = 0;
+    let currentStepIndex = 0;
+    let currentSlideSteps = [];
+
+    const currentSlideNumEl = document.getElementById('current-slide-num');
+    const totalSlideNumEl = document.getElementById('total-slide-num');
+    const currentStepNumEl = document.getElementById('current-step-num');
+    const totalStepNumEl = document.getElementById('total-step-num');
+    const progressBar = document.getElementById('progress-bar');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const tocBtn = document.getElementById('toc-btn');
+    const tocModal = document.getElementById('toc-modal');
+    const closeTocBtn = document.getElementById('close-toc-btn');
+    const tocList = document.getElementById('toc-list');
+    const fullscreenBtn = document.getElementById('fullscreen-btn');
+    const fullscreenIcon = document.getElementById('fullscreen-icon');
+    const fullscreenText = document.getElementById('fullscreen-text');
+
+    totalSlideNumEl.textContent = totalSlides;
+
+    const slideTitles = [
+        "1. Tiêu đề",
+        "2. Agenda — 7 phần",
+        "3. Định nghĩa Logistics",
+        "4. Logistics vs Supply Chain",
+        "5. Quy mô thị trường 2025",
+        "6. Biểu đồ tăng trưởng",
+        "7. Vai trò nền kinh tế",
+        "8. Chi phí logistics",
+        "9. Xếp hạng quốc tế",
+        "10. 6 mảng hoạt động",
+        "11. Vận tải đa phương thức",
+        "12. Kho bãi & Hải quan",
+        "13. Logistics ngược",
+        "14. AI & Chuyển đổi số",
+        "15. Logistics xanh 2026",
+        "16. TMĐT & Cross-border",
+        "17. Cơ hội việc làm",
+        "18. Vị trí công việc",
+        "19. Mức thu nhập",
+        "20. Lộ trình thăng tiến",
+        "21. Trường đại học",
+        "22. Chứng chỉ quốc tế",
+        "23. Kỹ năng cốt lõi",
+        "24. Tổng kết",
+        "25. Thank You"
+    ];
+
+    slideTitles.forEach((title, idx) => {
+        const btn = document.createElement('button');
+        btn.className = `p-4 rounded-xl text-left text-base font-medium border-2 transition ${
+            idx === 0 ? 'bg-coral-50 border-coral-300 text-coral-600' : 'bg-white border-cream-200 text-slate-600 hover:border-coral-300 hover:bg-coral-50'
+        }`;
+        btn.innerHTML = `<span class="block font-bold">${title}</span>`;
+        btn.addEventListener('click', () => {
+            goToSlide(idx);
+            tocModal.classList.add('hidden');
+            tocModal.classList.remove('flex');
+        });
+        tocList.appendChild(btn);
+    });
+
+    function updateSlideView() {
+        slides.forEach((slide, idx) => {
+            if (idx === currentSlideIndex) {
+                slide.classList.add('active');
+            } else {
+                slide.classList.remove('active');
+            }
+        });
+
+        const activeSlide = slides[currentSlideIndex];
+        currentSlideSteps = Array.from(activeSlide.querySelectorAll('.reveal-item'));
+        currentStepIndex = 0;
+
+        currentSlideSteps.forEach(item => item.classList.remove('revealed'));
+
+        if (currentSlideSteps.length > 0) {
+            currentSlideSteps[0].classList.add('revealed');
+            currentStepIndex = 1;
+        }
+
+        currentSlideNumEl.textContent = currentSlideIndex + 1;
+        currentStepNumEl.textContent = currentStepIndex;
+        totalStepNumEl.textContent = currentSlideSteps.length || 1;
+
+        const progressPercent = ((currentSlideIndex + 1) / totalSlides) * 100;
+        progressBar.style.width = `${progressPercent}%`;
+
+        prevBtn.disabled = (currentSlideIndex === 0 && currentStepIndex <= 1);
+    }
+
+    function handleNext() {
+        if (currentStepIndex < currentSlideSteps.length) {
+            currentSlideSteps[currentStepIndex].classList.add('revealed');
+            currentStepIndex++;
+            currentStepNumEl.textContent = currentStepIndex;
+            prevBtn.disabled = false;
+        } else if (currentSlideIndex < totalSlides - 1) {
+            currentSlideIndex++;
+            updateSlideView();
+        }
+    }
+
+    function handlePrev() {
+        if (currentStepIndex > 1) {
+            currentStepIndex--;
+            currentSlideSteps[currentStepIndex].classList.remove('revealed');
+            currentStepNumEl.textContent = currentStepIndex;
+            if (currentSlideIndex === 0 && currentStepIndex <= 1) {
+                prevBtn.disabled = true;
+            }
+        } else if (currentSlideIndex > 0) {
+            currentSlideIndex--;
+            updateSlideView();
+            currentSlideSteps.forEach(item => item.classList.add('revealed'));
+            currentStepIndex = currentSlideSteps.length;
+            currentStepNumEl.textContent = currentStepIndex;
+        }
+    }
+
+    function goToSlide(index) {
+        currentSlideIndex = index;
+        updateSlideView();
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+            e.preventDefault();
+            handleNext();
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+            e.preventDefault();
+            handlePrev();
+        } else if (e.key === 'f' || e.key === 'F') {
+            toggleFullscreen();
+        }
+    });
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+    document.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; });
+    document.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        if (touchEndX < touchStartX - 50) handleNext();
+        if (touchEndX > touchStartX + 50) handlePrev();
+    });
+
+    function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen().catch(err => console.error(err));
+        } else {
+            if (document.exitFullscreen) document.exitFullscreen();
+        }
+    }
+
+    document.addEventListener('fullscreenchange', () => {
+        if (document.fullscreenElement) {
+            document.body.classList.add('is-fullscreen');
+            fullscreenText.textContent = "Thoát FM";
+            fullscreenIcon.setAttribute('data-lucide', 'minimize');
+        } else {
+            document.body.classList.remove('is-fullscreen');
+            fullscreenText.textContent = "Toàn Màn Hình";
+            fullscreenIcon.setAttribute('data-lucide', 'maximize');
+        }
+        lucide.createIcons();
+        setTimeout(fitStage, 100);
+    });
+
+    nextBtn.addEventListener('click', handleNext);
+    prevBtn.addEventListener('click', handlePrev);
+    fullscreenBtn.addEventListener('click', toggleFullscreen);
+
+    tocBtn.addEventListener('click', () => {
+        tocModal.classList.remove('hidden');
+        tocModal.classList.add('flex');
+    });
+
+    closeTocBtn.addEventListener('click', () => {
+        tocModal.classList.add('hidden');
+        tocModal.classList.remove('flex');
+    });
+
+    tocModal.addEventListener('click', (e) => {
+        if (e.target === tocModal) {
+            tocModal.classList.add('hidden');
+            tocModal.classList.remove('flex');
+        }
+    });
+
+    updateSlideView();
+});
+</script>
+</body>
+</html>
